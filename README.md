@@ -1,6 +1,10 @@
 # School Evaluation System📄✏
 ## **Description** 📑
 
+***School Evaluation System*** is a program for institutional use that allows a teacher to formulate evaluations in the different courses he/she is in charge of.
+
+This program allows a teacher to enter the system and then view two sections, evaluations and students. In the evaluations section you can enter the questionnaires, workshops or exams that you have formulated for a course and then you can edit or delete an evaluation. You can also import or export evaluations. In the students section, you can create a new course by entering its name or select from the list the course you want to enter and then you will have a visualization of the list of students of that course, as well as the options to edit the information of a selected student and create a new student. You will also be able to import or export the list of students.
+
 ## Mockups
 * Login Screen:
 
