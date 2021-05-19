@@ -5,6 +5,8 @@
 
 This program allows a teacher to enter the system and then view two sections, evaluations and students. In the evaluations section you can enter the questionnaires, workshops or exams that you have formulated for a course and then you can edit or delete an evaluation. You can also import or export evaluations. In the students section, you can create a new course by entering its name or select from the list the course you want to enter and then you will have a visualization of the list of students of that course, as well as the options to edit the information of a selected student and create a new student. You will also be able to import or export the list of students.
 
+The idea of the ***School Evaluation System*** project was born from the need for a total transition to technology due to the change to virtuality in education. This project seeks to provide a tool to any teacher in their evaluation management with students.
+
 ## Mockups
 * Login Screen:
 
