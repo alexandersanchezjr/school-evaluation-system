@@ -29,9 +29,10 @@
             <TableView fx:id="tvAdmins" onMouseClicked="#showAdminInfo" prefHeight="128.0" prefWidth="516.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="tcAdminName" prefWidth="75.0" text="Nombre" />
-                  <TableColumn fx:id="tcAdminSurname" prefWidth="75.0" text="Apellido" />
-                  <TableColumn fx:id="tcAdminId" prefWidth="75.0" text="Identificación" />
-                  <TableColumn fx:id="tcAdminUsername" prefWidth="75.0" text="Nombre de Usuario" />
+                  <TableColumn fx:id="tcAdminSurname" prefWidth="75.0" text="\%" />
+                  <TableColumn fx:id="tcAdminId" prefWidth="75.0" text="Fecha Inicio" />
+                  <TableColumn fx:id="tcAdminUsername" prefWidth="75.0" text="Fecha Fin" />
+                  <TableColumn fx:id="tcAdminUsername1" prefWidth="75.0" text="Intentos" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -78,13 +79,14 @@
                      </font>
                   </TextField>
                   <TextArea prefHeight="339.0" prefWidth="491.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                  <DatePicker maxWidth="1.7976931348623157E308" promptText="Fecha de la evaluación" GridPane.rowIndex="2" />
+                  <DatePicker maxWidth="1.7976931348623157E308" promptText="Fecha Fin" GridPane.rowIndex="2" />
                   <Label fx:id="labEmployeeId21" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido del cuestionario" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="Gill Sans MT" size="20.0" />
                      </font>
                   </Label>
                   <Spinner editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker maxWidth="1.7976931348623157E308" promptText="Fecha Inicio" GridPane.columnIndex="1" />
                </children>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
