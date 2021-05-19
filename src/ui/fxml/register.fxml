@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainFirstRegisterPane" maxWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane fx:id="mainRegisterGridPane" alignment="CENTER" hgap="10.0" layoutX="75.0" layoutY="75.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="700.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="5000.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="5000.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="registerNameTxt" focusTraversable="false" promptText="Nombre" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font></TextField>
+            <TextField fx:id="registerSurnameTxt" focusTraversable="false" layoutX="10.0" layoutY="65.0" maxWidth="1.7976931348623157E308" promptText="Apellido" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font></TextField>
+            <TextField fx:id="registerIdTxt" focusTraversable="false" layoutX="310.0" layoutY="65.0" maxWidth="1.7976931348623157E308" promptText="Correo" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font></TextField>
+            <TextField fx:id="registerUsernameTxt" focusTraversable="false" layoutX="10.0" layoutY="198.0" maxWidth="1.7976931348623157E308" promptText="Código" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font></TextField>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Registrate" GridPane.columnSpan="3">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="40.0" />
+               </font>
+            </Label>
+            <TextField fx:id="registerPasswordTxt" focusTraversable="false" layoutX="378.0" layoutY="198.0" maxWidth="1.7976931348623157E308" promptText="Profesión" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font></TextField>
+            <Button mnemonicParsing="false" onAction="#registerFirstAdmin" prefWidth="150.0" text="Registrarme" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font></Button>
+            <Separator prefWidth="200.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button layoutX="397.0" layoutY="278.0" mnemonicParsing="false" onAction="#goBackFromRegister" prefWidth="150.0" text="Atrás" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Gill Sans MT" size="24.0" />
+               </font>
+            </Button>
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="365.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <children>
+                  <Label text="Disponibilidad: " />
+                  <ToggleButton mnemonicParsing="false" style="-fx-background-color: green;" text="Tiempo Completo" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
