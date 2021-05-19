@@ -9,7 +9,7 @@ This program allows a teacher to enter the system and then view two sections, ev
 
 ## Mockups🔲💭
 |Login Screen:|Manager Screen:|
-|-------------------------|-------------------------|
+|:-------------------------:|:-------------------------:|
 ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/login.png) Login Screen provides an intuitive way to get into the app just remembering the teacher's name and the code.| ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/manager.png) From here, the teacher can manage the whole system. He or she can access to all the evaluations and the whole students.
 
 * Course Pane:
