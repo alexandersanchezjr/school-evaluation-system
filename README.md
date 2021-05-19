@@ -8,21 +8,22 @@ This program allows a teacher to enter the system and then view two sections, ev
 💡 The idea of the ***School Evaluation System*** project was born from the need for a total transition to technology due to the change to virtuality in education. This project seeks to provide a tool to any teacher in their evaluation management with students.
 
 ## Mockups🔲💭
-* Login Screen:
-
-![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/login.png)
-
-* Manager Screen:
-
-![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/manager.png)
+|Login Screen:|Manager Screen:|
+|:-------------------------:|:-------------------------:|
+![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/login.png) | ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/manager.png)
 
 * Course Pane:
 
 ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/course%20pane.png)
 
-* Questionnaire Pane:
+|Questionnaire Pane:|Assessment Pane:|
+|:-------------------------:|:-------------------------:|
+![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/questionnaire%20pane.png)|![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/assessment%20pane.png)
 
-![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/questionnaire%20pane.png)
+|Exam Pane:|Register Screen:|
+|:-------------------------:|:-------------------------:|
+![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/exam%20pane.png)|![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/register.png)
+
 
 ## Creators 👨🏻‍💻
 This program was created unique and exclusively by [Santiago Arévalo (santiagoarevalo)](https://github.com/santiagoarevalo) and [Alexander Sánchez (ALEXJR2002)](https://github.com/ALEXJR2002).
