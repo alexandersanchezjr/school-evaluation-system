@@ -7,7 +7,7 @@ This program allows a teacher to enter the system and then view two sections, ev
 
 The idea of the ***School Evaluation System*** project was born from the need for a total transition to technology due to the change to virtuality in education. This project seeks to provide a tool to any teacher in their evaluation management with students.
 
-## Mockups
+## Mockups🔲💭
 * Login Screen:
 
 ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/login.png)
