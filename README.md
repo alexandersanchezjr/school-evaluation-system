@@ -20,6 +20,10 @@ The idea of the ***School Evaluation System*** project was born from the need fo
 
 ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/course%20pane.png)
 
+* Questionnaire Pane:
+
+![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/questionnaire%20pane.png)
+
 ## Creators 👨🏻‍💻
 This program was created unique and exclusively by [Santiago Arévalo (santiagoarevalo)](https://github.com/santiagoarevalo) and [Alexander Sánchez (ALEXJR2002)](https://github.com/ALEXJR2002).
 
