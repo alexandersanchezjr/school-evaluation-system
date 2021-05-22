@@ -31,7 +31,7 @@ This pane is self-explanatory. From here, the teacher can visualize all of the s
 This program was created unique and exclusively by [Santiago Arévalo (santiagoarevalo)](https://github.com/santiagoarevalo) and [Alexander Sánchez (ALEXJR2002)](https://github.com/ALEXJR2002).
 
 ## **Project Design** ✏
-The program design (functional requirements and class diagram) is documented in the following [link]()
+The program design (functional requirements and class diagram) is documented in the following [link](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/docs/Ar%C3%A9valo%20-%20S%C3%A1nchez.pdf)
 
 ## **Technical Conditions** 💻
 ***Lenguage:*** Java 1.8
