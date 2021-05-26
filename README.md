@@ -9,7 +9,7 @@ This program allows a teacher to enter the system and then view two sections, ev
 
 ## Mockups🔲💭
 |Login Screen:|Manager Screen:|
-|-------------------------|-------------------------|
+|:-------------------------:|:-------------------------:|
 ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/login.png) Login Screen provides an intuitive way to get into the app just remembering the teacher's name and the code.| ![Image](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/img/mockups/manager.png) From here, the teacher can manage the whole system. He or she can access to all the evaluations and the whole students.
 
 * Course Pane:
@@ -31,7 +31,7 @@ This pane is self-explanatory. From here, the teacher can visualize all of the s
 This program was created unique and exclusively by [Santiago Arévalo (santiagoarevalo)](https://github.com/santiagoarevalo) and [Alexander Sánchez (ALEXJR2002)](https://github.com/ALEXJR2002).
 
 ## **Project Design** ✏
-The program design (functional requirements and class diagram) is documented in the following [link]()
+The program design (functional requirements and class diagram) is documented in the following [link](https://github.com/ALEXJR2002/school-evaluation-system/blob/master/docs/Ar%C3%A9valo%20-%20S%C3%A1nchez.pdf)
 
 ## **Technical Conditions** 💻
 ***Lenguage:*** Java 1.8
