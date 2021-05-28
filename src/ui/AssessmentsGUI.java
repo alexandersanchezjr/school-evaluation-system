@@ -35,9 +35,6 @@ public class AssessmentsGUI {
     private DatePicker finalDatePicker;
 
     @FXML
-    private Label labEmployeeId21;
-
-    @FXML
     private DatePicker initialDatePicker;
 
     @FXML
@@ -49,7 +46,7 @@ public class AssessmentsGUI {
     }
 
     @FXML
-    void cleanQuestionnaires(ActionEvent event) {
+    void cleanList(ActionEvent event) {
 
     }
 
@@ -59,7 +56,7 @@ public class AssessmentsGUI {
     }
 
     @FXML
-    void deleteQuestionnaire(ActionEvent event) {
+    void deleteAssessment(ActionEvent event) {
 
     }
 
@@ -74,12 +71,12 @@ public class AssessmentsGUI {
     }
 
     @FXML
-    void showAssessments(MouseEvent event) {
+    void showAssessmentInfo(MouseEvent event) {
 
     }
 
     @FXML
-    void showQuestionnaireInfo(MouseEvent event) {
+    void showAssessments(MouseEvent event) {
 
     }
 }
