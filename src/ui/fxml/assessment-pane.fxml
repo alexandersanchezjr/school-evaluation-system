@@ -25,7 +25,7 @@
    <children>
       <VBox layoutX="174.0" layoutY="45.0" prefHeight="502.0" prefWidth="526.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
          <children>
-            <TableView fx:id="assessmentsTableView" onMouseClicked="#showQuestionnaireInfo" prefHeight="128.0" prefWidth="516.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="assessmentsTableView" onMouseClicked="#showAssessmentInfo" prefHeight="128.0" prefWidth="516.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="tcAssessmentsName" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="tcAssessmentsPercentage" prefWidth="75.0" text="\%" />
@@ -38,9 +38,9 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#deleteQuestionnaire" text="Borrar " />
+                      <MenuItem mnemonicParsing="false" onAction="#deleteAssessment" text="Borrar " />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#cleanQuestionnaires" text="Limpiar lista" />
+                        <MenuItem mnemonicParsing="false" onAction="#cleanList" text="Limpiar lista" />
                     </items>
                   </ContextMenu>
                </contextMenu>
