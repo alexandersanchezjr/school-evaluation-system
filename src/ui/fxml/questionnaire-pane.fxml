@@ -63,7 +63,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="labEmployeeId2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Información:" GridPane.columnSpan="2" GridPane.vgrow="ALWAYS">
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Información:" GridPane.columnSpan="2" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font name="Gill Sans MT" size="20.0" />
                      </font>
