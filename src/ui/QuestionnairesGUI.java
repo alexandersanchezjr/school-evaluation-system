@@ -26,9 +26,6 @@ public class QuestionnairesGUI {
     private TableColumn<?, ?> tcQuestionnairesAttempts;
 
     @FXML
-    private Label labEmployeeId2;
-
-    @FXML
     private TextField nameTextField;
 
     @FXML

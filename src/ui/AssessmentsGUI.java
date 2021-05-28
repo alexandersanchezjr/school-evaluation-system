@@ -23,9 +23,6 @@ public class AssessmentsGUI {
     private TableColumn<?, ?> tcAssessmentsFinalDate;
 
     @FXML
-    private Label labEmployeeId2;
-
-    @FXML
     private TextField assessmentNameTextField;
 
     @FXML
