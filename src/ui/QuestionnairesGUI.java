@@ -38,9 +38,6 @@ public class QuestionnairesGUI {
     private DatePicker finalDatePicker;
 
     @FXML
-    private Label labEmployeeId21;
-
-    @FXML
     private Spinner<?> attemptsSpinner;
 
     @FXML
@@ -50,7 +47,7 @@ public class QuestionnairesGUI {
     private ChoiceBox<?> coursesChoiceBox;
 
     @FXML
-    void cleanAdminTableView(ActionEvent event) {
+    void cleanList(ActionEvent event) {
 
     }
 
@@ -60,7 +57,7 @@ public class QuestionnairesGUI {
     }
 
     @FXML
-    void deleteAdmin(ActionEvent event) {
+    void deleteQuestionnaire(ActionEvent event) {
 
     }
 
@@ -75,7 +72,7 @@ public class QuestionnairesGUI {
     }
 
     @FXML
-    void showAdminInfo(MouseEvent event) {
+    void showQuestionnaireInfo(MouseEvent event) {
 
     }
 
