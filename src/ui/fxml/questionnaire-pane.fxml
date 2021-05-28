@@ -26,7 +26,7 @@
    <children>
       <VBox layoutX="174.0" layoutY="45.0" prefHeight="502.0" prefWidth="526.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
          <children>
-            <TableView fx:id="questionnairesTableView" onMouseClicked="#showAdminInfo" prefHeight="128.0" prefWidth="516.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="questionnairesTableView" onMouseClicked="#showQuestionnaireInfo" prefHeight="128.0" prefWidth="516.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="tcQuestionnairesName" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="tcQuestionnairesPercentage" prefWidth="75.0" text="\%" />
@@ -40,9 +40,9 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#deleteAdmin" text="Borrar " />
+                      <MenuItem mnemonicParsing="false" onAction="#deleteQuestionnaire" text="Borrar " />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#cleanAdminTableView" text="Limpiar lista" />
+                        <MenuItem mnemonicParsing="false" onAction="#cleanList" text="Limpiar lista" />
                     </items>
                   </ContextMenu>
                </contextMenu>
@@ -80,7 +80,7 @@
                   </TextField>
                   <TextArea fx:id="questionnaireContentTextArea" disable="true" prefHeight="339.0" prefWidth="491.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                   <DatePicker fx:id="finalDatePicker" disable="true" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Fin" GridPane.rowIndex="2" />
-                  <Label fx:id="labEmployeeId21" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido del cuestionario" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido del cuestionario" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="Gill Sans MT" size="20.0" />
                      </font>
