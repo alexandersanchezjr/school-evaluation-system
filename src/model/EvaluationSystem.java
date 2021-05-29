@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EvaluationSystem {
@@ -55,8 +56,8 @@ public class EvaluationSystem {
 	* @param code The institutional code assigned to the new teacher.
 	* @param fullTime The type of the new teacher (boolean value, full time or half-time).
 	*/
-	public void addTeacher(String name, String lastName, String email, String code, boolean fullTime) {
-		Teacher newTeacher = new Teacher(name, lastName, email, code, fullTime);
+	public void addTeacher(String name, String lastName, String email, String code, String password, boolean fullTime) {
+		Teacher newTeacher = new Teacher(name, lastName, email, code, password, fullTime);
 		if(firstTeacher == null) {
 			firstTeacher = newTeacher;
 		}else {
@@ -78,5 +79,77 @@ public class EvaluationSystem {
 		}
 	}
 	
+	//Search Teacher
+	
+	public Teacher searchTeacher(String code) {
+		Teacher teacherSearched = null;
+		if(firstTeacher != null) {
+			if(firstTeacher.getCode().equals(code)) {
+				teacherSearched = firstTeacher;
+			}else {
+				return searchTeacher(code, firstTeacher.getNext());
+			}
+		}else {
+			return teacherSearched;
+		}
+		return teacherSearched;
+	}
+	
+	private Teacher searchTeacher(String code, Teacher current) {
+		Teacher teacherSearched = null;
+		if(current != null) {
+			if(current.getCode().equals(code)) {
+				teacherSearched = current;
+			}else {
+				searchTeacher(code, current.getNext());
+			}
+		}
+		return teacherSearched;
+	}
+	
+	//MANAGAMENT STUDENTS
+	
+	//Add Student
+	
+	public boolean addStudent(String name, String lastName, String email, String code) throws IOException {
+		boolean added = false;
+		Student newStudent = new Student(name, lastName, email, code);
+		if(!students.contains(newStudent)) {
+			added = students.add(newStudent);
+		}
+		return added;
+	}
+	
+	//Update Student info
+	
+	public void updateStudent(Student s, String name, String lastName, String email, String code) throws IOException {
+		int index = students.indexOf(s);
+		students.get(index).setName(name);
+		students.get(index).setLastName(lastName);
+		students.get(index).setEmail(email);
+		students.get(index).setCode(code);
+	}
+	
+	//Delete Student
+	
+	public boolean deleteStudent(Student s) throws IOException {
+		boolean deleted = false;
+		if(students.contains(s)) {
+			deleted = students.remove(s);
+		}
+		return deleted;
+	}
+	
+	//Search Student
+	
+	public Student searchStudent(String code) {
+		Student studentSearched = null;
+		for(int i = 0; i < students.size(); i++) {
+			if(students.get(i).getCode().equals(code)) {
+				studentSearched = students.get(i);
+			}
+		}
+		return studentSearched;
+	}
 	
 }
