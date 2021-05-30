@@ -5,13 +5,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.EvaluationSystem;
+
+import java.io.*;
 
 public class Main extends Application {
 
+	public final String SYSTEM_FILE_NAME = "data/system.sys";
+
 	private LoginGUI loginGUI;
+	private EvaluationSystem evaluationSystem;
 
 	public Main () {
-		loginGUI = new LoginGUI();
+		evaluationSystem = new EvaluationSystem();
+		loginGUI = new LoginGUI(evaluationSystem);
+		try {
+			loadSystemData();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
@@ -45,6 +59,20 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Sistema de Evaluación");
 		primaryStage.show();
+	}
+
+	public void saveSystemData() throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SYSTEM_FILE_NAME));
+		oos.writeObject(evaluationSystem);
+		oos.close();
+
+	}
+
+	public void loadSystemData() throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SYSTEM_FILE_NAME));
+		evaluationSystem = (EvaluationSystem) ois.readObject();
+		ois.close();
+
 	}
 
 }
