@@ -9,10 +9,26 @@ public class Course {
 	private ArrayList<Student> students;
 	private ArrayList<Evaluation> evaluations;
 	
+	private Course next;
+	
 	public Course(String cn) {
 		courseName = cn;
 		students = new ArrayList<Student>();
 		evaluations = new ArrayList<Evaluation>();
+	}
+
+	/**
+	 * @return the next
+	 */
+	public Course getNext() {
+		return next;
+	}
+
+	/**
+	 * @param next the next to set
+	 */
+	public void setNext(Course next) {
+		this.next = next;
 	}
 
 	/**
