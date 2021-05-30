@@ -8,6 +8,8 @@ public class EvaluationSystem {
 	
 	Teacher firstTeacher;
 	ArrayList<Student> students;
+	
+	Teacher logged;
 	/**
 	 * 
 	 */
@@ -40,6 +42,19 @@ public class EvaluationSystem {
 	 */
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
+	}
+	
+	/**
+	 * @return the logged
+	 */
+	public Teacher getLogged() {
+		return logged;
+	}
+	/**
+	 * @param logged the logged to set
+	 */
+	public void setLogged(Teacher logged) {
+		this.logged = logged;
 	}
 	
 	//MANAGEMENT TEACHERS
@@ -76,6 +91,24 @@ public class EvaluationSystem {
 		}else {
 			addTeacher(current.getNext(), newTeacher);
 		}
+	}
+	
+	//Update Teacher Info
+	public void updateTeacher(String name, String lastName, String email, String code, String password, boolean fullTime) {
+		logged.setName(name);
+		logged.setLastName(lastName);
+		logged.setEmail(email);
+		logged.setCode(code);
+		logged.setPassword(password);
+		logged.setFullTime(fullTime);
+	}
+	
+	//Remove Logged Teacher
+	
+	@SuppressWarnings("unused")
+	public void removeTeacher() {
+		Teacher thisTeacher = searchTeacher(logged.getCode());
+		thisTeacher = null;
 	}
 	
 	//Search Teacher
