@@ -2,25 +2,35 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.EvaluationSystem;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class AssessmentsGUI {
 
-    @FXML
-    private TableView<?> assessmentsTableView;
+    private EvaluationSystem evaluationSystem;
 
     @FXML
-    private TableColumn<?, ?> tcAssessmentsName;
+    private TableView<AssessmentsGUI> assessmentsTableView;
 
     @FXML
-    private TableColumn<?, ?> tcAssessmentsPercentage;
+    private TableColumn<AssessmentsGUI, String> tcAssessmentsName;
 
     @FXML
-    private TableColumn<?, ?> tcAssessmentsInitialDate;
+    private TableColumn<AssessmentsGUI, String> tcAssessmentsPercentage;
 
     @FXML
-    private TableColumn<?, ?> tcAssessmentsFinalDate;
+    private TableColumn<AssessmentsGUI, String> tcAssessmentsInitialDate;
+
+    @FXML
+    private TableColumn<AssessmentsGUI, String> tcAssessmentsFinalDate;
 
     @FXML
     private TextField assessmentNameTextField;
@@ -39,6 +49,14 @@ public class AssessmentsGUI {
 
     @FXML
     private ChoiceBox<?> coursesChoiceBox;
+
+    public AssessmentsGUI(EvaluationSystem evaluationSystem) {
+        this.evaluationSystem = evaluationSystem;
+    }
+
+    private void initializeAssessmentTableView () {
+
+    }
 
     @FXML
     void checkAnswers(ActionEvent event) {
@@ -62,12 +80,35 @@ public class AssessmentsGUI {
 
     @FXML
     void exportAssessmentsList(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("Reporte-Talleres.csv");
+
+        //Show save file dialog
+
+        File file = fileChooser.showSaveDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+
+        if (file != null) {
+
+        }
     }
 
     @FXML
     void importAssessmentsList(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+
+        if (file != null) {
+
+        }
     }
 
     @FXML
