@@ -133,7 +133,7 @@ public class EvaluationSystem {
 			if(current.getCode().equals(code)) {
 				teacherSearched = current;
 			}else {
-				searchTeacher(code, current.getNext());
+				teacherSearched = searchTeacher(code, current.getNext());
 			}
 		}
 		return teacherSearched;
