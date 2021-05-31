@@ -31,12 +31,12 @@ public class EvaluationSystemTest {
 	}
 	
 	@Test
-	public void testUpdateTeacher2() {
+	public void testRemoveTeacher1() {
 		
 	}
 	
 	@Test
-	public void testRemoveTeacher() {
+	public void testRemoveTeacher2() {
 		
 	}
 	
