@@ -2,27 +2,36 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.Course;
+import model.EvaluationSystem;
+
+import java.io.File;
 
 public class CoursesGUI {
 
 
-    @FXML
-    private TableView<?> studentsTableView;
+    private EvaluationSystem evaluationSystem;
 
     @FXML
-    private TableColumn<?, ?> tcStudentName;
+    private TableView<Course> studentsTableView;
 
     @FXML
-    private TableColumn<?, ?> tcStudentSurname;
+    private TableColumn<Course, String> tcStudentName;
 
     @FXML
-    private TableColumn<?, ?> tcStudentCode;
+    private TableColumn<Course, String> tcStudentSurname;
 
     @FXML
-    private TableColumn<?, ?> tcStudentEmail;
+    private TableColumn<Course, String> tcStudentCode;
+
+    @FXML
+    private TableColumn<Course, String> tcStudentEmail;
 
     @FXML
     private TextField studentNameTextField;
@@ -66,6 +75,14 @@ public class CoursesGUI {
     @FXML
     private TextField newStudentEmail;
 
+    public CoursesGUI(EvaluationSystem evaluationSystem) {
+        this.evaluationSystem = evaluationSystem;
+    }
+
+    private void initializeCoursesTableView () {
+
+    }
+
     @FXML
     void chooseNewPhoto(ActionEvent event) {
 
@@ -88,12 +105,35 @@ public class CoursesGUI {
 
     @FXML
     void exportStudentsList(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("Reporte-Estudiantes.csv");
+
+        //Show save file dialog
+
+        File file = fileChooser.showSaveDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+
+        if (file != null) {
+
+        }
     }
 
     @FXML
     void importStudentsList(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+
+        if (file != null) {
+
+        }
     }
 
     @FXML
