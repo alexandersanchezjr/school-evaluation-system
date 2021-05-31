@@ -2,28 +2,37 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.EvaluationSystem;
+import model.Questionnaire;
+
+import java.io.File;
 
 public class QuestionnairesGUI {
 
-    @FXML
-    private TableView<?> questionnairesTableView;
+    private EvaluationSystem evaluationSystem;
 
     @FXML
-    private TableColumn<?, ?> tcQuestionnairesName;
+    private TableView<Questionnaire> questionnairesTableView;
 
     @FXML
-    private TableColumn<?, ?> tcQuestionnairesPercentage;
+    private TableColumn<Questionnaire, String> tcQuestionnairesName;
 
     @FXML
-    private TableColumn<?, ?> tcInitialDate;
+    private TableColumn<Questionnaire, String> tcQuestionnairesPercentage;
 
     @FXML
-    private TableColumn<?, ?> tcFinalDate;
+    private TableColumn<Questionnaire, String> tcInitialDate;
 
     @FXML
-    private TableColumn<?, ?> tcQuestionnairesAttempts;
+    private TableColumn<Questionnaire, String> tcFinalDate;
+
+    @FXML
+    private TableColumn<Questionnaire, String> tcQuestionnairesAttempts;
 
     @FXML
     private TextField nameTextField;
@@ -46,6 +55,14 @@ public class QuestionnairesGUI {
     @FXML
     private ChoiceBox<?> coursesChoiceBox;
 
+    public QuestionnairesGUI(EvaluationSystem evaluationSystem) {
+        this.evaluationSystem = evaluationSystem;
+    }
+
+    private void initializeQuestionnaireTableView () {
+
+    }
+
     @FXML
     void cleanList(ActionEvent event) {
 
@@ -63,12 +80,35 @@ public class QuestionnairesGUI {
 
     @FXML
     void exportQuestionnairesList(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("Reporte-Cuestionarios.csv");
+
+        //Show save file dialog
+
+        File file = fileChooser.showSaveDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+
+        if (file != null) {
+
+        }
     }
 
     @FXML
     void importQuestionnairesList(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+
+        if (file != null) {
+
+        }
     }
 
     @FXML
