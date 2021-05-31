@@ -34,12 +34,12 @@ public class LoginGUI {
     public LoginGUI(EvaluationSystem evaluationSystem) {
         this.evaluationSystem = evaluationSystem;
         managerGUI = new ManagerGUI(evaluationSystem, this);
-        registerGUI = new RegisterGUI();
+        registerGUI = new RegisterGUI(evaluationSystem);
     }
 
     @FXML
     void logIn(ActionEvent event) {
-        if (true) {    //TODO check if the user does exist and make a separate method
+        if (exist(institutionalCodeTextField.getText(), passwordField.getText())) {    //TODO check if the user does exist and make a separate method
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/manager.fxml"));
 
             fxmlLoader.setController(managerGUI);
@@ -82,6 +82,16 @@ public class LoginGUI {
 
         window.setScene(registerScene);
         window.show();
+    }
+
+    private boolean exist(String codeToSearch, String passwordToSearch) {
+        boolean logged = false;
+            if(evaluationSystem.searchTeacher(codeToSearch) != null) {
+                if(evaluationSystem.searchTeacher(codeToSearch).getPassword().equals(passwordToSearch)) {
+                    logged = true;
+                }
+            }
+        return logged;
     }
 
 }
