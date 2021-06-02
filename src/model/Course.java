@@ -2,19 +2,22 @@ package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Course {
 
 	private String courseName;
 	private ArrayList<Student> students;
-	private ArrayList<Evaluation> evaluations;
+	private ArrayList<Activity> activities;
+	private ArrayList<Exam> exams;
 	
 	private Course next;
 	
 	public Course(String cn) {
 		courseName = cn;
 		students = new ArrayList<Student>();
-		evaluations = new ArrayList<Evaluation>();
+		activities = new ArrayList<Activity>();
+		exams = new ArrayList<Exam>();
 	}
 
 	/**
@@ -62,21 +65,35 @@ public class Course {
 	/**
 	 * @return the evaluations
 	 */
-	public ArrayList<Evaluation> getEvaluations() {
-		return evaluations;
+	public ArrayList<Activity> getActivities() {
+		return activities;
 	}
 
 	/**
 	 * @param evaluations the evaluations to set
 	 */
-	public void setEvaluations(ArrayList<Evaluation> evaluations) {
-		this.evaluations = evaluations;
+	public void setActivities(ArrayList<Activity> activities) {
+		this.activities = activities;
+	}
+	
+	/**
+	 * @return the exams
+	 */
+	public ArrayList<Exam> getExams() {
+		return exams;
+	}
+
+	/**
+	 * @param exams the exams to set
+	 */
+	public void setExams(ArrayList<Exam> exams) {
+		this.exams = exams;
 	}
 	
 	//MANAGAMENT STUDENTS
 	
 	//Add Student
-	
+
 	public boolean addStudent(String name, String lastName, String email, String code) throws IOException {
 		boolean added = false;
 		Student newStudent = new Student(name, lastName, email, code);
@@ -116,6 +133,46 @@ public class Course {
 			}
 		}
 		return studentSearched;
+	}
+	
+	//MANAGEMENT EVALUATIONS
+	
+	//Add Questionnaire
+	
+	public boolean addActivity(String topic, int percentage, String content, Calendar date, int attempts) {
+		boolean added = false;
+		Activity newQuestionnaire = new Questionnaire(topic, percentage, content, date, attempts);
+		if(!activities.contains(newQuestionnaire)) {
+			added = activities.add(newQuestionnaire);
+		}
+		return added;
+	}
+	
+	//Add WorkShop
+	
+	public boolean addActivity(String topic, int percentage, String content, Calendar date, String answers) {
+		boolean added = false;
+		Activity newWorkshop = new Workshop(topic, percentage, content, date, answers);
+		if(!activities.contains(newWorkshop)) {
+			added = activities.add(newWorkshop);
+		}
+		return added;
+	}
+	
+	//Add Exams
+	
+	public boolean addExam(String topic, int percentage, String content, int timeLimit) {
+		boolean added = false;
+		Exam newExam = new Exam(topic, percentage, content, timeLimit);	
+		if(!exams.contains(newExam)) {
+			added = exams.add(newExam);
+		}
+		return added;
+	}
+	
+	@Override
+	public String toString() {
+		return courseName;
 	}
 
 }
