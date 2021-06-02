@@ -117,11 +117,46 @@ public class Teacher extends Member {
 		}
 	}
 	
-	public void updateCourse(Course c) {
-		
+	//Update Course
+	
+	public void updateCourseName(Course c, String newName) {
+		c.setCourseName(newName);
 	}
 	
+	//Remove Course
+	
+	@SuppressWarnings("unused")
 	public void removeCourse(Course c) {
-		
+		Course thisCourse = searchCourse(c.getCourseName());
+		thisCourse = null;
+	}
+	
+	
+	//Search Course
+	
+	public Course searchCourse(String name) {
+		Course courseSearched = null;
+		if(firstCourse != null) {
+			if(firstCourse.getCourseName().equals(name)) {
+				courseSearched = firstCourse;
+			}else {
+				return searchCourse(name, firstCourse.getNext());
+			}
+		}else {
+			return courseSearched;
+		}
+		return courseSearched;
+	}
+	
+	private Course searchCourse(String name, Course current) {
+		Course courseSearched = null;
+		if(current != null) {
+			if(current.getCourseName().equals(name)) {
+				courseSearched = current;
+			}else {
+				courseSearched = searchCourse(name, current.getNext());
+			}
+		}
+		return courseSearched;
 	}
 }
