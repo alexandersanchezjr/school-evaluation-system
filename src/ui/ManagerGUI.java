@@ -7,9 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Course;
 import model.EvaluationSystem;
 import model.Exam;
 
@@ -33,6 +35,9 @@ public class ManagerGUI {
 
     @FXML
     private AnchorPane mainPane;
+
+    @FXML
+    private ComboBox<Course> coursesComboBox;
 
     public ManagerGUI(EvaluationSystem evaluationSystem, LoginGUI loginGUI) {
         this.evaluationSystem = evaluationSystem;
@@ -81,6 +86,9 @@ public class ManagerGUI {
 
     @FXML
     void showCoursesPane(ActionEvent event) {
+        Course selectedCourse = coursesComboBox.getSelectionModel().getSelectedItem();
+        coursesGUI.initialize(selectedCourse);
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/course-pane.fxml"));
 
         fxmlLoader.setController(coursesGUI);

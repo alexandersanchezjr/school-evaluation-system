@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -63,11 +64,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showCoursesPane" prefHeight="50.0" prefWidth="150.0" text="Cursos">
-               <font>
-                  <Font name="Gill Sans MT" size="18.0" />
-               </font>
-            </Button>
+            <ComboBox fx:id="coursesComboBox" onAction="#showCoursesPane" prefHeight="50.0" prefWidth="150.0" promptText="Seleccione un curso" />
             <Separator prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="15.0" top="10.0" />

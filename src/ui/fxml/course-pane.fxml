@@ -87,7 +87,7 @@
             </GridPane>
          </children>
       </VBox>
-      <Label fx:id="courseNameLabel" layoutY="10.0" prefHeight="25.0" text="Curso 03">
+      <Label fx:id="courseNameLabel" layoutY="10.0" onInputMethodTextChanged="#changeCourseName" prefHeight="25.0" text="Curso 03">
          <font>
             <Font name="Gill Sans MT Bold" size="30.0" />
          </font>

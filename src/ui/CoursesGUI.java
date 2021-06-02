@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -84,6 +85,11 @@ public class CoursesGUI {
     }
 
     @FXML
+    void changeCourseName(InputMethodEvent event) {
+
+    }
+
+    @FXML
     void chooseNewPhoto(ActionEvent event) {
 
     }
@@ -149,5 +155,14 @@ public class CoursesGUI {
     @FXML
     void updateStudentPhoto(ActionEvent event) {
 
+    }
+
+    public void initialize(Course selectedCourse) {
+        courseNameLabel.setText(selectedCourse.getCourseName());
+        initializeStudentTableView(selectedCourse);
+    }
+
+    private void initializeStudentTableView(Course selectedCourse) {
+        //Todo fill the student table view
     }
 }
