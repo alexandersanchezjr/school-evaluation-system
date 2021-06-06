@@ -1,13 +1,16 @@
 package model;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class EvaluationSystem {
 	
 	//ATTRIBUTES
 	
 	Teacher firstTeacher;
-	ArrayList<Student> students;
 	
 	Teacher logged;
 	/**
@@ -15,7 +18,6 @@ public class EvaluationSystem {
 	 */
 	public EvaluationSystem() {
 		firstTeacher = null;
-		students = new ArrayList<Student>();
 	}
 	/**
 	 * @return the firstTeacher
@@ -29,19 +31,6 @@ public class EvaluationSystem {
 	 */
 	public void setFirstTeacher(Teacher firstTeacher) {
 		this.firstTeacher = firstTeacher;
-	}
-	/**
-	 * @return the students
-	 */
-	public ArrayList<Student> getStudents() {
-		return students;
-	}
-	
-	/**
-	 * @param students the students to set
-	 */
-	public void setStudents(ArrayList<Student> students) {
-		this.students = students;
 	}
 	
 	/**
@@ -70,8 +59,8 @@ public class EvaluationSystem {
 	* @param code The institutional code assigned to the new teacher.
 	* @param fullTime The type of the new teacher (boolean value, full time or half-time).
 	*/
-	public void addTeacher(String name, String lastName, String email, String code, String password, boolean fullTime) {
-		Teacher newTeacher = new Teacher(name, lastName, email, code, password, fullTime);
+	public void addTeacher(String name, String lastName, String email, String code, String password, boolean fullTime, String career, int contEvaluations) {
+		Teacher newTeacher = new Teacher(name, lastName, email, code, password, fullTime, career, contEvaluations);
 		if(firstTeacher == null) {
 			firstTeacher = newTeacher;
 		}else {
@@ -139,6 +128,38 @@ public class EvaluationSystem {
 		return teacherSearched;
 	}
 	
+	//IMPORT TEACHERS
 	
+	public void importTeachers(String fileName, String separator) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line!=null ) {
+			String[] parts = line.split(separator);
+			String name = parts[0];
+			String lastName = parts[1];
+			String email = parts[2];
+			String code = parts[3];
+			String password = parts[4];
+			boolean fullTime = Boolean.parseBoolean(parts[5]);
+			String career = parts[6];
+			int contEvaluations = Integer.parseInt(parts[7]);
+			addTeacher(name, lastName, email, code, password, fullTime, career, contEvaluations);
+			line = br.readLine();
+		}
+		br.close();
+	}
+	
+	//EXPORT TEACHERS
+	
+	public void exportTeachers(String fileName, String separator) throws FileNotFoundException {
+		PrintWriter pw = new PrintWriter(fileName);
+		Teacher current = firstTeacher;
+		while(current != null) {
+			pw.write(current.getName() + separator + current.getLastName() + separator + current.getEmail() + separator + current.getCode()
+			+ separator + current.getPassword() + separator + current.isFullTime() + separator + current.getCareer() + separator + current.getContEvaluations());
+			current = current.getNext();
+		}
+		pw.close();
+	}
 	
 }
