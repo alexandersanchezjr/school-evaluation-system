@@ -59,7 +59,7 @@ public class RegisterGUI {
         }else{
             Teacher teacherToRegister = evaluationSystem.searchTeacher(codeTextField.getText());
             if (teacherToRegister == null){
-                evaluationSystem.addTeacher(nameTextField.getText(), surnameTextField.getText(), emailTextField.getText(), codeTextField.getText(), passwordTextField.getText(), checkAvailability());
+                evaluationSystem.addTeacher(nameTextField.getText(), surnameTextField.getText(), emailTextField.getText(), codeTextField.getText(), passwordTextField.getText(), checkAvailability(), "Carrera Profesional", 0);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Registro exitoso");
                 alert.setHeaderText("Su cuenta ya ha sido creada");
