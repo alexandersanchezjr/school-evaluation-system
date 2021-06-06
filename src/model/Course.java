@@ -10,6 +10,7 @@ public class Course {
 	private ArrayList<Student> students;
 	private ArrayList<Activity> activities;
 	private ArrayList<Exam> exams;
+	private ArrayList<Grade> averageGrades;
 	
 	private Course next;
 	
@@ -18,6 +19,7 @@ public class Course {
 		students = new ArrayList<Student>();
 		activities = new ArrayList<Activity>();
 		exams = new ArrayList<Exam>();
+		setAverageGrades(new ArrayList<Grade>());
 	}
 
 	/**
@@ -93,6 +95,20 @@ public class Course {
 	//MANAGAMENT STUDENTS
 	
 	//Add Student
+
+	/**
+	 * @return the averageGrades
+	 */
+	public ArrayList<Grade> getAverageGrades() {
+		return averageGrades;
+	}
+
+	/**
+	 * @param averageGrades the averageGrades to set
+	 */
+	public void setAverageGrades(ArrayList<Grade> averageGrades) {
+		this.averageGrades = averageGrades;
+	}
 
 	public boolean addStudent(String name, String lastName, String email, String code) throws IOException {
 		boolean added = false;
