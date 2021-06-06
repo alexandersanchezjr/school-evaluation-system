@@ -5,14 +5,17 @@ public class Teacher extends Member {
 	private String password;
 	private boolean fullTime; //If this boolean value is true it means this teacher is full time, else he's half time teacher.
 	private String career;
+	private int contEvaluations;
 	
 	private Course firstCourse;
 	private Teacher next;
 	
-	public Teacher(String name, String lastName, String email, String code, String password, boolean fullTime) {
+	public Teacher(String name, String lastName, String email, String code, String password, boolean fullTime, String career, int cont) {
 		super(name, lastName, email, code);
 		this.password = password;
 		this.fullTime = fullTime;
+		this.career = career;
+		contEvaluations = cont;
 	}
 
 	/**
@@ -69,6 +72,20 @@ public class Teacher extends Member {
 	 */
 	public void setCareer(String career) {
 		this.career = career;
+	}
+
+	/**
+	 * @return the contEvaluations
+	 */
+	public int getContEvaluations() {
+		return contEvaluations;
+	}
+
+	/**
+	 * @param contEvaluations the contEvaluations to set
+	 */
+	public void setContEvaluations(int contEvaluations) {
+		this.contEvaluations = contEvaluations;
 	}
 
 	/**
