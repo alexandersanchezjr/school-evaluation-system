@@ -1,11 +1,11 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Activity extends Evaluation {
 	
-	private Calendar assignmentDate;
+	private LocalDate assignmentDate;
 	private ArrayList<String> helpLinks;
 
 	/**
@@ -13,7 +13,7 @@ public class Activity extends Evaluation {
 	 * @param percentage
 	 * @param content
 	 */
-	public Activity(String topic, int percentage, String content, Calendar date) {
+	public Activity(String topic, int percentage, String content, LocalDate date) {
 		super(topic, percentage, content);
 		assignmentDate = date;
 		helpLinks = new ArrayList<String>();
@@ -22,14 +22,14 @@ public class Activity extends Evaluation {
 	/**
 	 * @return the assignmentDate
 	 */
-	public Calendar getAssignmentDate() {
+	public LocalDate getAssignmentDate() {
 		return assignmentDate;
 	}
 
 	/**
 	 * @param assignmentDate the assignmentDate to set
 	 */
-	public void setAssignmentDate(Calendar assignmentDate) {
+	public void setAssignmentDate(LocalDate assignmentDate) {
 		this.assignmentDate = assignmentDate;
 	}
 
