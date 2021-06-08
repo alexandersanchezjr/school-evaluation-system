@@ -1,6 +1,8 @@
 package ui;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import model.Exam;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,6 +32,7 @@ public class ManagerGUI {
     private QuestionnairesGUI questionnairesGUI;
     private ExamsGUI examsGUI;
     private CoursesGUI coursesGUI;
+    private ArrayList<Course> courses;
 
     @FXML
     private Label timeLabel;
@@ -46,6 +50,20 @@ public class ManagerGUI {
         questionnairesGUI = new QuestionnairesGUI(evaluationSystem);
         examsGUI = new ExamsGUI(evaluationSystem);
         coursesGUI = new CoursesGUI(evaluationSystem);
+        initializeComboBox ();
+    }
+
+    private void initializeComboBox () {
+        getCourses(evaluationSystem.getLogged().getFirstCourse());
+        ObservableList<Course> list = FXCollections.observableArrayList(courses);
+        coursesComboBox.setItems(list);
+    }
+
+    private void getCourses (Course course) {
+        if (course != null) {
+            courses.add(course);
+            getCourses(course.getNext());
+        }
     }
 
     @FXML

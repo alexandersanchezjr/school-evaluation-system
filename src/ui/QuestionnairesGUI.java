@@ -1,16 +1,22 @@
 package ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Activity;
+import model.Course;
 import model.EvaluationSystem;
 import model.Questionnaire;
 
 import java.io.File;
+import java.time.LocalDate;
 
 public class QuestionnairesGUI {
 
@@ -29,9 +35,6 @@ public class QuestionnairesGUI {
     private TableColumn<Questionnaire, String> tcInitialDate;
 
     @FXML
-    private TableColumn<Questionnaire, String> tcFinalDate;
-
-    @FXML
     private TableColumn<Questionnaire, String> tcQuestionnairesAttempts;
 
     @FXML
@@ -44,24 +47,29 @@ public class QuestionnairesGUI {
     private TextArea questionnaireContentTextArea;
 
     @FXML
-    private DatePicker finalDatePicker;
-
-    @FXML
-    private Spinner<?> attemptsSpinner;
+    private Spinner<Integer> attemptsSpinner;
 
     @FXML
     private DatePicker initialDatePicker;
 
     @FXML
-    private ChoiceBox<?> coursesChoiceBox;
+    private ComboBox<Course> coursesComboBox;
 
     public QuestionnairesGUI(EvaluationSystem evaluationSystem) {
         this.evaluationSystem = evaluationSystem;
     }
 
-    private void initializeQuestionnaireTableView () {
+    private void initializeQuestionnaireTableView (Course course) {
 
+        ObservableList<Questionnaire> list = FXCollections.observableArrayList(course.getQuestionnaires());
+        questionnairesTableView.setItems(list);
+        tcQuestionnairesName.setCellValueFactory(new PropertyValueFactory<Questionnaire, String>("topic"));
+        tcQuestionnairesPercentage.setCellValueFactory(new PropertyValueFactory<Questionnaire, String>("percentage"));
+        tcInitialDate.setCellValueFactory(new PropertyValueFactory<Questionnaire, String>("assignmentDate"));
+        tcQuestionnairesAttempts.setCellValueFactory(new PropertyValueFactory<Questionnaire, String>("attempts"));
+        questionnairesTableView.refresh();
     }
+
 
     @FXML
     void cleanList(ActionEvent event) {
@@ -113,11 +121,37 @@ public class QuestionnairesGUI {
 
     @FXML
     void showQuestionnaireInfo(MouseEvent event) {
+        Questionnaire questionnaire = questionnairesTableView.getSelectionModel().getSelectedItem();
+        if (questionnaire != null) {
+            //Set Topic
+            nameTextField.setDisable(false);
+            nameTextField.setText(questionnaire.getTopic());
+            //Set percentage
+            percentageTextField.setDisable(false);
+            percentageTextField.setText(questionnaire.getPercentage() + "%");
+            //Set initial date
+            initialDatePicker.setDisable(false);
+            initialDatePicker.setValue(questionnaire.getAssignmentDate());
+            //Set attempts
+            attemptsSpinner.setDisable(false);
+            attemptsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, questionnaire.getAttempts()));
+            //Set content
+            questionnaireContentTextArea.setDisable(false);
+            questionnaireContentTextArea.setText(questionnaire.getContent());
+        }else {
+            //Disable the objects
+            nameTextField.setDisable(true);
+            percentageTextField.setDisable(true);
+            initialDatePicker.setDisable(true);
+            attemptsSpinner.setDisable(true);
+            questionnaireContentTextArea.setDisable(true);
 
+        }
     }
 
     @FXML
-    void showQuestionnaires(MouseEvent event) {
-
+    void showQuestionnaires(ActionEvent event) {
+        Course course = coursesComboBox.getSelectionModel().getSelectedItem();
+        initializeQuestionnaireTableView(course);
     }
 }
