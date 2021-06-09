@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -165,7 +166,7 @@ public class Course {
 	
 	//Add Questionnaire
 	
-	public boolean addActivity(String topic, int percentage, String content, Calendar date, int attempts) {
+	public boolean addActivity(String topic, int percentage, String content, LocalDate date, int attempts) {
 		boolean added = false;
 		Activity newQuestionnaire = new Questionnaire(topic, percentage, content, date, attempts);
 		if(!activities.contains(newQuestionnaire)) {
@@ -176,7 +177,7 @@ public class Course {
 	
 	//Add WorkShop
 	
-	public boolean addActivity(String topic, int percentage, String content, Calendar date, String answers) {
+	public boolean addActivity(String topic, int percentage, String content, LocalDate date, String answers) {
 		boolean added = false;
 		Activity newWorkshop = new Workshop(topic, percentage, content, date, answers);
 		if(!activities.contains(newWorkshop)) {
