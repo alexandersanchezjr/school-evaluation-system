@@ -28,7 +28,7 @@
                <columns>
                   <TableColumn fx:id="tcAssessmentsName" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="tcAssessmentsPercentage" prefWidth="75.0" text="\%" />
-                  <TableColumn fx:id="tcAssessmentsInitialDate" prefWidth="75.0" text="Fecha Inicio" />
+                  <TableColumn fx:id="tcAssessmentsInitialDate" prefWidth="75.0" text="Fecha" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -75,7 +75,6 @@
                      </font>
                   </TextField>
                   <TextArea fx:id="assessmentContentTextArea" disable="true" prefHeight="339.0" prefWidth="491.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                  <DatePicker fx:id="finalDatePicker" disable="true" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Fin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label fx:id="labEmployeeId21" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido del taller" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="Gill Sans MT" size="20.0" />
