@@ -1,10 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-import java.util.Calendar;
-=======
->>>>>>> 975453f0fc0e99e9c9709833f49f00452b6be498
 
 public class Workshop extends Activity {
 

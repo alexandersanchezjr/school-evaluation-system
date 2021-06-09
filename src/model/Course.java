@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.io.PrintWriter;
->>>>>>> 975453f0fc0e99e9c9709833f49f00452b6be498
 import java.time.LocalDate;
 import java.util.ArrayList;
 
