@@ -85,6 +85,16 @@ public class Course {
 		return questionnaires;
 	}
 
+	public ArrayList<Workshop> getAssessments () {
+		ArrayList<Workshop> assessments = new ArrayList<Workshop>();
+		for (Activity element : activities) {
+			if (element instanceof Workshop) {
+				assessments.add((Workshop) element);
+			}
+		}
+		return assessments;
+	}
+
 	/**
 	 * @param evaluations the evaluations to set
 	 */
