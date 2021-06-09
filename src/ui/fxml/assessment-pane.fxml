@@ -29,7 +29,6 @@
                   <TableColumn fx:id="tcAssessmentsName" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="tcAssessmentsPercentage" prefWidth="75.0" text="\%" />
                   <TableColumn fx:id="tcAssessmentsInitialDate" prefWidth="75.0" text="Fecha Inicio" />
-                  <TableColumn fx:id="tcAssessmentsFinalDate" prefWidth="75.0" text="Fecha Fin" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
