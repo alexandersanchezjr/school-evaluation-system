@@ -56,18 +56,9 @@ public class ManagerGUI {
     }
 
     private void initializeComboBox () {
-        getCourses(evaluationSystem.getLogged().getFirstCourse());
-        if (courses != null) {
-            ObservableList<Course> list = FXCollections.observableArrayList(courses);
-            coursesComboBox.setItems(list);
-        }
-    }
-
-    private void getCourses (Course course) {
-        if (course != null) {
-            courses.add(course);
-            getCourses(course.getNext());
-        }
+        courses = evaluationSystem.getLogged().getCourses();
+        ObservableList<Course> list = FXCollections.observableArrayList(courses);
+        coursesComboBox.setItems(list);
     }
 
     @FXML
