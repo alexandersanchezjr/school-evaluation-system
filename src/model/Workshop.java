@@ -1,12 +1,13 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Workshop extends Activity {
 
 	private String answers;
 	
-	public Workshop(String topic, int percentage, String content, Calendar date, String answers) {
+	public Workshop(String topic, int percentage, String content, LocalDate date, String answers) {
 		super(topic, percentage, content, date);
 		this.setAnswers(answers);
 	}
