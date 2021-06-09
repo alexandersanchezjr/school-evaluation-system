@@ -187,6 +187,15 @@ public class Course {
 		}
 		return added;
 	}
+
+	public void cleanQuestionnaire () {
+		boolean cleaned = false;
+		for (Activity element : activities) {
+			if (element instanceof Questionnaire){
+				activities.remove(element);
+			}
+		}
+	}
 	
 	//Add WorkShop
 	
@@ -197,6 +206,15 @@ public class Course {
 			added = activities.add(newWorkshop);
 		}
 		return added;
+	}
+
+	public void cleanAssessments () {
+		boolean cleaned = false;
+		for (Activity element : activities) {
+			if (element instanceof Workshop){
+				activities.remove(element);
+			}
+		}
 	}
 	
 	//Add Exams
