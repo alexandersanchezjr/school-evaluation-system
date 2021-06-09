@@ -2,16 +2,24 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import model.EvaluationSystem;
 import model.Teacher;
+
+import java.io.IOException;
 
 public class RegisterGUI {
 
     EvaluationSystem evaluationSystem;
+    LoginGUI loginGUI;
 
     @FXML
     private GridPane mainRegisterGridPane;
@@ -34,8 +42,9 @@ public class RegisterGUI {
     @FXML
     private ToggleButton availabilityToogleButton;
 
-    public RegisterGUI (EvaluationSystem evaluationSystem) {
+    public RegisterGUI (EvaluationSystem evaluationSystem, LoginGUI loginGUI) {
         this.evaluationSystem = evaluationSystem;
+        this.loginGUI = loginGUI;
     }
 
     @FXML
@@ -45,7 +54,20 @@ public class RegisterGUI {
 
     @FXML
     void goBack(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
 
+        fxmlLoader.setController(loginGUI);
+        Parent LoginWindow = null;
+        try {
+            LoginWindow = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene loginScene = new Scene (LoginWindow);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(loginScene);
+        window.show();
     }
 
     @FXML
