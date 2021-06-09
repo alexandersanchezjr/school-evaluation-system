@@ -2,7 +2,6 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Activity extends Evaluation {
 	

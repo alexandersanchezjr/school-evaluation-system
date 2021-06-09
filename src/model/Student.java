@@ -9,6 +9,11 @@ public class Student extends Member {
 		super(name, lastName, email, code);
 		setFinalAverageGrade(0.0);
 	}
+	
+	public Student(String name, String lastName, String email, String code, double finalGrade) {
+		super(name, lastName, email, code);
+		finalAverageGrade = finalGrade;
+	}
 
 	/**
 	 * @return the finalAverageGrade

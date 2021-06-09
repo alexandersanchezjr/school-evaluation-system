@@ -1,9 +1,15 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.io.PrintWriter;
+>>>>>>> 975453f0fc0e99e9c9709833f49f00452b6be498
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Course {
 
@@ -196,6 +202,73 @@ public class Course {
 		}
 		return added;
 	}
+	
+	//IMPORT STUDENTS
+	
+	public void importStudents(String fileName, String separator) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line!=null ) {
+			String[] parts = line.split(separator);
+			String name = parts[0];
+			String lastName = parts[1];
+			String email = parts[2];
+			String code = parts[3];
+			double finalAverageGrade = Double.parseDouble(parts[4]);
+			students.add(new Student(name, lastName, email, code, finalAverageGrade));
+			line = br.readLine();
+		}
+		br.close();
+	}
+	
+	//EXPORT STUDENTS
+	
+	public void exportStudents(String fileName, String separator) throws FileNotFoundException {
+		PrintWriter pw = new PrintWriter(fileName);
+		for(int j = 0; j < students.size(); j++){
+    		pw.write(students.get(j).getName() + separator + students.get(j).getLastName() + separator + students.get(j).getEmail() + separator + students.get(j).getCode() + separator + students.get(j).getFinalAverageGrade()); 
+    	}
+		pw.close();
+	}
+	
+	//IMPORT ACTIVITIES
+	
+	public void importWorkshops(String fileName, String separator) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line!=null ) {
+			String[] parts = line.split(separator);
+			String topic = parts[0];
+			int percentage = Integer.parseInt(parts[1]);
+			String content = parts[2];
+			CharSequence cs = parts[3].subSequence(0, parts[3].length());
+			LocalDate date = LocalDate.parse(cs);
+			//TODO import the list of helpLinks
+			String answers = parts[4];
+			activities.add(new Workshop(topic, percentage, content, date, answers));
+			line = br.readLine();
+		}
+		br.close();
+	}
+	
+	//EXPORT ACTIVITIES
+	
+	public void exportActivities(String fileName, String separator) throws FileNotFoundException {
+		PrintWriter pw = new PrintWriter(fileName);
+		for(int j = 0; j < activities.size(); j++){
+    		if(activities.get(j) instanceof Workshop) {
+    			Workshop ws = (Workshop) activities.get(j);
+    			//TODO export the list of helpLinks
+    			pw.write(ws.getTopic() + separator + ws.getPercentage() + separator + ws.getContent() + separator + ws.getAssignmentDate() + separator + ws.getAnswers()); 
+    		}else if(activities.get(j) instanceof Questionnaire) {
+    			Questionnaire quest = (Questionnaire) activities.get(j);
+    			//TODO export the list of helpLinks
+    			pw.write(quest.getTopic() + separator + quest.getPercentage() + separator + quest.getContent() + separator + quest.getAssignmentDate() + separator + quest.getAttempts());
+    		}
+		}
+		pw.close();
+	}
+		
 	
 	@Override
 	public String toString() {
