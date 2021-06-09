@@ -1,12 +1,13 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Questionnaire extends Activity {
 
 	private int attempts;
 	
-	public Questionnaire(String topic, int percentage, String content, Calendar date, int attempts) {
+	public Questionnaire(String topic, int percentage, String content, LocalDate date, int attempts) {
 		super(topic, percentage, content, date);
 		this.setAttempts(attempts);
 	}
