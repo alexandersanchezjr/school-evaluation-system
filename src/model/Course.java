@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Course {
 
@@ -165,6 +167,33 @@ public class Course {
 		return studentSearched;
 	}
 	
+	public Student binarySearchStudent(String name, String code) {
+		Comparator<Student> nameAndCode = new Comparator<Student>() {
+			@Override
+            public int compare(Student obj1, Student obj2) {
+                String f1 = obj1.getName().toLowerCase();
+                String c1 = obj1.getCode().toLowerCase();
+                String f2 = obj2.getName().toLowerCase();
+                String c2 = obj2.getCode().toLowerCase();
+
+                if (c1.compareTo(c2) == 0) {
+                    return f2.compareTo(f1);
+                } else {
+                    return c2.compareTo(c1);
+                }
+            }
+        };
+
+        Student key = new Student(name, "", "", code);
+        int index = Collections.binarySearch(students, key, nameAndCode);
+        if (index < 0){
+            key = null;
+        }else {
+            key = students.get(index);
+        }
+        return key;
+    }
+	
 	//MANAGEMENT EVALUATIONS
 	
 	//Add Questionnaire
@@ -178,6 +207,28 @@ public class Course {
 		return added;
 	}
 	
+	//Modify Questionnaire
+	
+	public void updateQuestionnaire(Questionnaire q, String topic, int percentage, String content, LocalDate date, int attempts, ArrayList<String> helpLinks) {
+		int index = activities.indexOf(q);
+		activities.get(index).setTopic(topic);
+		activities.get(index).setPercentage(percentage);
+		activities.get(index).setContent(content);
+		activities.get(index).setAssignmentDate(date);
+		((Questionnaire) activities.get(index)).setAttempts(attempts);
+		activities.get(index).setHelpLinks(helpLinks);
+	}
+	
+	//Delete Questionnaire
+	
+	public boolean deleteQuestionnaire(Questionnaire q) {
+		boolean deleted = false;
+		if(activities.contains(q)) {
+			deleted = activities.remove(q);
+		}
+		return deleted;
+	}
+	
 	//Add WorkShop
 	
 	public boolean addActivity(String topic, int percentage, String content, LocalDate date, String answers) {
@@ -187,6 +238,28 @@ public class Course {
 			added = activities.add(newWorkshop);
 		}
 		return added;
+	}
+	
+	//Modify WorkShop
+	
+	public void updateWorkshops(Workshop w, String topic, int percentage, String content, LocalDate date, String answers, ArrayList<String> helpLinks) {
+		int index = activities.indexOf(w);
+		activities.get(index).setTopic(topic);
+		activities.get(index).setPercentage(percentage);
+		activities.get(index).setContent(content);
+		activities.get(index).setAssignmentDate(date);
+		((Workshop) activities.get(index)).setAnswers(answers);
+		activities.get(index).setHelpLinks(helpLinks);
+	}
+	
+	//Delete WorkShop
+	
+	public boolean deleteQuestionnaire(Workshop w) {
+		boolean deleted = false;
+		if(activities.contains(w)) {
+			deleted = activities.remove(w);
+		}
+		return deleted;
 	}
 	
 	//Add Exams
@@ -199,6 +272,18 @@ public class Course {
 		}
 		return added;
 	}
+	
+	//Modify Exam
+	
+	public void updateExam(Exam e, String topic, int percentage, String content, int timeLimit) {
+		int index = exams.indexOf(e);
+		exams.get(index).setTopic(topic);
+		exams.get(index).setPercentage(percentage);
+		exams.get(index).setContent(content);
+		exams.get(index).setTimeLimit(timeLimit);
+	}
+	
+	//Delete Exam
 	
 	//IMPORT STUDENTS
 	
@@ -242,7 +327,25 @@ public class Course {
 			LocalDate date = LocalDate.parse(cs);
 			//TODO import the list of helpLinks
 			String answers = parts[4];
-			activities.add(new Workshop(topic, percentage, content, date, answers));
+			addActivity(topic, percentage, content, date, answers);
+			line = br.readLine();
+		}
+		br.close();
+	}
+	
+	public void importQuestionnaires(String fileName, String separator) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line!=null ) {
+			String[] parts = line.split(separator);
+			String topic = parts[0];
+			int percentage = Integer.parseInt(parts[1]);
+			String content = parts[2];
+			CharSequence cs = parts[3].subSequence(0, parts[3].length());
+			LocalDate date = LocalDate.parse(cs);
+			//TODO import the list of helpLinks
+			int attempts = Integer.parseInt(parts[4]);
+			addActivity(topic, percentage, content, date, attempts);
 			line = br.readLine();
 		}
 		br.close();
@@ -266,6 +369,33 @@ public class Course {
 		pw.close();
 	}
 		
+	//IMPORT EXAMS
+	
+	public void importExams(String fileName, String separator) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line!=null ) {
+			String[] parts = line.split(separator);
+			String topic = parts[0];
+			int percentage = Integer.parseInt(parts[1]);
+			String content = parts[2];
+			//TODO import the list of helpLinks
+			int timeLimit = Integer.parseInt(parts[4]);
+			addExam(topic, percentage, content, timeLimit);
+			line = br.readLine();
+		}
+		br.close();
+	}
+	
+	//EXPORT EXAMS
+	
+	public void exportExams(String fileName, String separator) throws FileNotFoundException {
+		PrintWriter pw = new PrintWriter(fileName);
+		for(int j = 0; j < exams.size(); j++){
+			pw.write(exams.get(j).getTopic() + separator + exams.get(j).getPercentage() + separator + exams.get(j).getContent() + separator + exams.get(j).getTimeLimit()); 
+		}
+		pw.close();
+	}
 	
 	@Override
 	public String toString() {
