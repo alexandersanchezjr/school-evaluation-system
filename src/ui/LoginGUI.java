@@ -40,7 +40,7 @@ public class LoginGUI {
 
     @FXML
     void logIn(ActionEvent event) {
-        if (exist(institutionalCodeTextField.getText(), passwordField.getText()) != null) {    //TODO check if the user does exist and make a separate method
+        if (exist(institutionalCodeTextField.getText(), passwordField.getText()) != null) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/manager.fxml"));
 
             fxmlLoader.setController(managerGUI);
