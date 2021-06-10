@@ -60,22 +60,22 @@
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="studentNameTextField" promptText="Nombre" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <TextField fx:id="studentSurnameTextField" promptText="Apellido" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <TextField fx:id="studentCodeTextField" layoutX="10.0" layoutY="33.0" promptText="Código" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <TextField fx:id="studentEmailTextField" layoutX="10.0" layoutY="58.0" promptText="Correo" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <TextField fx:id="studentGradeTextField" layoutX="134.0" layoutY="58.0" promptText="Nota" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button fx:id="updateStudentButton" mnemonicParsing="false" onAction="#updateStudent" text="Actualizar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <TextField fx:id="studentNameTextField" disable="true" promptText="Nombre" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <TextField fx:id="studentSurnameTextField" disable="true" promptText="Apellido" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <TextField fx:id="studentCodeTextField" disable="true" layoutX="10.0" layoutY="33.0" promptText="Código" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <TextField fx:id="studentEmailTextField" disable="true" layoutX="10.0" layoutY="58.0" promptText="Correo" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <TextField fx:id="studentGradeTextField" disable="true" layoutX="134.0" layoutY="58.0" promptText="Nota" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="updateStudentButton" disable="true" mnemonicParsing="false" onAction="#updateStudent" text="Actualizar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Label prefHeight="25.0" text="Información:">
                      <font>
                         <Font name="Gill Sans MT" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="updatePhotoButton" mnemonicParsing="false" onAction="#updateStudentPhoto" prefHeight="135.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS">
+                  <Button fx:id="updatePhotoButton" disable="true" mnemonicParsing="false" onAction="#updateStudentPhoto" prefHeight="135.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fx:id="studentPhoto" fitHeight="143.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../Documentos%20Universidad/Foto%203x4.jpg" />
+                              <Image url="@../../../img/default-person.jpg" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -108,7 +108,7 @@
                <graphic>
                   <ImageView fx:id="newStudentPhoto" fitHeight="201.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../img/profile%20photo%20-%20santiago.jpg" />
+                        <Image url="@../../../img/default-person.jpg" />
                      </image>
                   </ImageView>
                </graphic>
