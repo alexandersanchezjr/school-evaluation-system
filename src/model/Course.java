@@ -218,7 +218,6 @@ public class Course {
 	}
 
 	public void cleanQuestionnaire () {
-		boolean cleaned = false;
 		for (Activity element : activities) {
 			if (element instanceof Questionnaire){
 				activities.remove(element);
@@ -260,7 +259,6 @@ public class Course {
 	}
 
 	public void cleanAssessments () {
-		boolean cleaned = false;
 		for (Activity element : activities) {
 			if (element instanceof Workshop){
 				activities.remove(element);
