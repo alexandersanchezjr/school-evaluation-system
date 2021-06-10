@@ -30,7 +30,6 @@
                   <TableColumn fx:id="tcQuestionnairesName" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="tcQuestionnairesPercentage" prefWidth="75.0" text="\%" />
                   <TableColumn fx:id="tcInitialDate" prefWidth="75.0" text="Fecha Inicio" />
-                  <TableColumn fx:id="tcFinalDate" prefWidth="75.0" text="Fecha Fin" />
                   <TableColumn fx:id="tcQuestionnairesAttempts" prefWidth="75.0" text="Intentos" />
                </columns>
                <columnResizePolicy>
@@ -78,14 +77,13 @@
                      </font>
                   </TextField>
                   <TextArea fx:id="questionnaireContentTextArea" disable="true" prefHeight="339.0" prefWidth="491.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                  <DatePicker fx:id="finalDatePicker" disable="true" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Fin" GridPane.rowIndex="2" />
                   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido del cuestionario" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="Gill Sans MT" size="20.0" />
                      </font>
                   </Label>
                   <Spinner fx:id="attemptsSpinner" disable="true" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="initialDatePicker" disable="true" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Inicio" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="initialDatePicker" disable="true" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Inicio" GridPane.rowIndex="2" />
                </children>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />

@@ -87,6 +87,16 @@ public class Course {
 		return questionnaires;
 	}
 
+	public ArrayList<Workshop> getAssessments () {
+		ArrayList<Workshop> assessments = new ArrayList<Workshop>();
+		for (Activity element : activities) {
+			if (element instanceof Workshop) {
+				assessments.add((Workshop) element);
+			}
+		}
+		return assessments;
+	}
+
 	/**
 	 * @param evaluations the evaluations to set
 	 */
@@ -206,6 +216,15 @@ public class Course {
 		}
 		return added;
 	}
+
+	public void cleanQuestionnaire () {
+		boolean cleaned = false;
+		for (Activity element : activities) {
+			if (element instanceof Questionnaire){
+				activities.remove(element);
+			}
+		}
+	}
 	
 	//Modify Questionnaire
 	
@@ -238,6 +257,15 @@ public class Course {
 			added = activities.add(newWorkshop);
 		}
 		return added;
+	}
+
+	public void cleanAssessments () {
+		boolean cleaned = false;
+		for (Activity element : activities) {
+			if (element instanceof Workshop){
+				activities.remove(element);
+			}
+		}
 	}
 	
 	//Modify WorkShop

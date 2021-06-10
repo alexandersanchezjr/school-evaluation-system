@@ -11,6 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Course;
@@ -50,20 +53,12 @@ public class ManagerGUI {
         questionnairesGUI = new QuestionnairesGUI(evaluationSystem);
         examsGUI = new ExamsGUI(evaluationSystem);
         coursesGUI = new CoursesGUI(evaluationSystem);
-        initializeComboBox ();
     }
 
     private void initializeComboBox () {
-        getCourses(evaluationSystem.getLogged().getFirstCourse());
+        courses = evaluationSystem.getLogged().getCourses();
         ObservableList<Course> list = FXCollections.observableArrayList(courses);
         coursesComboBox.setItems(list);
-    }
-
-    private void getCourses (Course course) {
-        if (course != null) {
-            courses.add(course);
-            getCourses(course.getNext());
-        }
     }
 
     @FXML
@@ -170,4 +165,11 @@ public class ManagerGUI {
             }
         }, 0, 1000);
     }
+
+    @FXML
+    void updateCoursesComboBox(MouseEvent event) {
+        System.out.println("Drag on");
+        initializeComboBox();
+    }
+
 }

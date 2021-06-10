@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.EvaluationSystem;
+import model.Teacher;
 
 import java.io.IOException;
 
@@ -34,12 +35,12 @@ public class LoginGUI {
     public LoginGUI(EvaluationSystem evaluationSystem) {
         this.evaluationSystem = evaluationSystem;
         managerGUI = new ManagerGUI(evaluationSystem, this);
-        registerGUI = new RegisterGUI(evaluationSystem);
+        registerGUI = new RegisterGUI(evaluationSystem, this);
     }
 
     @FXML
     void logIn(ActionEvent event) {
-        if (exist(institutionalCodeTextField.getText(), passwordField.getText())) {    //TODO check if the user does exist and make a separate method
+        if (exist(institutionalCodeTextField.getText(), passwordField.getText()) != null) {    //TODO check if the user does exist and make a separate method
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/manager.fxml"));
 
             fxmlLoader.setController(managerGUI);
@@ -84,12 +85,11 @@ public class LoginGUI {
         window.show();
     }
 
-    private boolean exist(String codeToSearch, String passwordToSearch) {
-        boolean logged = false;
-            if(evaluationSystem.searchTeacher(codeToSearch) != null) {
-                if(evaluationSystem.searchTeacher(codeToSearch).getPassword().equals(passwordToSearch)) {
-                    logged = true;
-                }
+    private Teacher exist(String codeToSearch, String passwordToSearch) {
+        Teacher logged = null;
+            if(evaluationSystem.searchTeacher(codeToSearch) != null && evaluationSystem.searchTeacher(codeToSearch).getPassword().equals(passwordToSearch)) {
+                logged = evaluationSystem.searchTeacher(codeToSearch);
+                evaluationSystem.setLogged(logged);
             }
         return logged;
     }

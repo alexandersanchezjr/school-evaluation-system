@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Teacher extends Member {
 
 	private String password;
@@ -93,6 +95,22 @@ public class Teacher extends Member {
 	 */
 	public Course getFirstCourse() {
 		return firstCourse;
+	}
+
+	public ArrayList<Course> getCourses () {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		if (firstCourse != null) {
+			courses.add(firstCourse);
+			getCourses(firstCourse.getNext(), courses);
+		}
+		return courses;
+	}
+
+	private void getCourses (Course course, ArrayList<Course> courses) {
+		if (course != null) {
+			courses.add(course);
+			getCourses(course.getNext(), courses);
+		}
 	}
 
 	/**
