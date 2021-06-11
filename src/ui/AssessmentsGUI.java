@@ -4,11 +4,14 @@ import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.*;
@@ -49,10 +52,14 @@ public class AssessmentsGUI {
     private DatePicker initialDatePicker;
 
     @FXML
+    private Button checkAnswersButton;
+
+    @FXML
     private ComboBox<Course> coursesComboBox;
 
     public AssessmentsGUI(EvaluationSystem evaluationSystem) {
         this.evaluationSystem = evaluationSystem;
+
     }
 
     private void initializeComboBox () {
@@ -72,7 +79,52 @@ public class AssessmentsGUI {
 
     @FXML
     void checkAnswers(ActionEvent event) {
-        //TODO create check answers pane and finished this method
+        Workshop assessment = assessmentsTableView.getSelectionModel().getSelectedItem();
+
+        if (assessment != null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Panel de diálogo");
+            alert.setHeaderText("Taller: " + assessment.getTopic() + ".");
+            alert.setContentText("Despliegue para ver más...");
+
+            Label label = new Label("Las respuestas son:");
+
+            TextArea textArea = new TextArea(assessment.getAnswers());
+            textArea.setEditable(true);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            alert.setOnCloseRequest(new EventHandler<DialogEvent>() {
+                @Override
+                public void handle(DialogEvent event) {
+                    if (!textArea.getText().equals(assessment.getAnswers())){
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmación");
+                        alert.setHeaderText("Operación con riesgo: Respuestas diferentes");
+                        alert.setContentText("¿Está seguro que desea modificar las respuestas al taller?");
+
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK){
+                            assessment.setAnswers(textArea.getText());
+                        } else {
+                            event.consume();
+                        }
+                    }
+                }
+            });
+            alert.getDialogPane().setExpandableContent(expContent);
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
@@ -125,39 +177,6 @@ public class AssessmentsGUI {
             alert.setHeaderText("Taller eliminado");
             alert.setContentText("El taller ha sido eliminado existosamente. Presione OK");
             alert.showAndWait();
-
-        }
-    }
-
-    @FXML
-    void exportAssessmentsList(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialFileName("Reporte-Talleres.csv");
-
-        //Show save file dialog
-
-        File file = fileChooser.showSaveDialog((Stage)((Node)event.getSource()).getScene().getWindow());
-
-        if (file != null) {
-
-        }
-    }
-
-    @FXML
-    void importAssessmentsList(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        File file = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
-
-        if (file != null) {
 
         }
     }
