@@ -55,6 +55,9 @@ public class ExamsGUI {
     private TextField examLimitTimeTextField;
 
     @FXML
+    private Button updateExamButton;
+
+    @FXML
     private ComboBox<Course> coursesComboBox;
 
     public ExamsGUI(EvaluationSystem evaluationSystem) {
@@ -180,6 +183,9 @@ public class ExamsGUI {
     }
 
     private void disableFields() {
+        //Update button
+        updateExamButton.setDisable(false);
+
         //Exam name
         examNameTextField.setDisable(true);
         examNameTextField.setText(null);
@@ -198,6 +204,9 @@ public class ExamsGUI {
     }
 
     private void enableAndShow(Exam e) {
+        //Update button
+        updateExamButton.setDisable(false);
+
         //Exam name
         examNameTextField.setDisable(false);
         examNameTextField.setText(e.getTopic());
@@ -219,5 +228,42 @@ public class ExamsGUI {
     void showExams(ActionEvent event) {
         currentCourse = coursesComboBox.getSelectionModel().getSelectedItem();
         initializeExamsTableView();
+    }
+
+    @FXML
+    void updateExam(ActionEvent event) {
+        Exam exam = examsTableView.getSelectionModel().getSelectedItem();
+
+        if (!hasEmptyField()){
+            String name = examNameTextField.getText();
+            int percentage = Integer.parseInt(examPercentageTextField.getText());
+            String content = examContentTextArea.getText();
+            int timeLimit = Integer.parseInt(examLimitTimeTextField.getText());
+            currentCourse.updateExam(exam, name, percentage, content, timeLimit);
+
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Campos Vacíos");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, rellene todos los campos para poder actualizar un exámen");
+            alert.showAndWait();
+        }
+    }
+
+    private boolean hasEmptyField() {
+        boolean emptyField = false;
+        if (examNameTextField.getText().isEmpty()){
+            emptyField = true;
+        }
+        if (examPercentageTextField.getText().isEmpty()){
+            emptyField = true;
+        }
+        if (examContentTextArea.getText().isEmpty()){
+            emptyField = true;
+        }
+        if (examLimitTimeTextField.getText().isEmpty()) {
+            emptyField = true;
+        }
+        return emptyField;
     }
 }
