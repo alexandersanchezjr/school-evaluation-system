@@ -1,13 +1,21 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
-public class EvaluationSystem {
+public class EvaluationSystem implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	public final String EVALUATION_SYSTEM_FILE_NAME = "data/evaluation-system.cdr";
+
 	//ATTRIBUTES
 	
 	Teacher firstTeacher;
@@ -160,6 +168,20 @@ public class EvaluationSystem {
 			current = current.getNext();
 		}
 		pw.close();
+	}
+	
+	//Serialization 
+	
+	public void saveEvaluationSystemData() throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(EVALUATION_SYSTEM_FILE_NAME));
+		oos.writeObject(this);
+		oos.close();
+	}
+	
+	public void loadEvaluationSystemData(EvaluationSystem es) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(EVALUATION_SYSTEM_FILE_NAME));
+		es = (EvaluationSystem)ois.readObject();
+		ois.close();
 	}
 	
 }
