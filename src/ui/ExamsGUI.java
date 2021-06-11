@@ -172,6 +172,11 @@ public class ExamsGUI {
     }
 
     @FXML
+    void refreshCourses(MouseEvent event) {
+        initializeExamsTableView();
+    }
+
+    @FXML
     void showExamInfo(MouseEvent event) {
         Exam exam = examsTableView.getSelectionModel().getSelectedItem();
 
