@@ -143,8 +143,8 @@ public class AssessmentsGUI {
             selectedCourse.cleanAssessments();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Operación exitosa");
-            alert.setHeaderText("Lista de cuestionarios eliminada");
-            alert.setContentText("Todos los cuestionarios han sido borrados existosamente. Presione OK");
+            alert.setHeaderText("Lista de talleres eliminada");
+            alert.setContentText("Todos los talleres han sido borrados existosamente. Presione OK");
             alert.showAndWait();
 
             initializeAssessmentTableView();
@@ -171,7 +171,7 @@ public class AssessmentsGUI {
     @FXML
     void deleteAssessment(ActionEvent event) {
         Workshop assessment = assessmentsTableView.getSelectionModel().getSelectedItem();
-        if (selectedCourse.getActivities().remove(assessment)){
+        if (selectedCourse.deleteWorkshop(assessment)){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Operación exitosa");
             alert.setHeaderText("Taller eliminado");

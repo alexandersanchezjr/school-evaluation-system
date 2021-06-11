@@ -298,7 +298,7 @@ public class Course {
 	
 	//Delete WorkShop
 	
-	public boolean deleteQuestionnaire(Workshop w) {
+	public boolean deleteWorkshop (Workshop w) {
 		boolean deleted = false;
 		if(activities.contains(w)) {
 			deleted = activities.remove(w);
