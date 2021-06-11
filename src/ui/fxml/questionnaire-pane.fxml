@@ -107,7 +107,7 @@
             <Font name="Gill Sans MT" size="16.0" />
          </font>
       </Button>
-      <ComboBox fx:id="coursesComboBox" layoutX="535.0" layoutY="15.0" onAction="#showQuestionnaires" prefHeight="25.0" prefWidth="300.0" promptText="Escoja un curso para ver los cuestionarios" AnchorPane.rightAnchor="10.0" />
+      <ComboBox fx:id="coursesComboBox" layoutX="535.0" layoutY="15.0" onAction="#showQuestionnaires" onMouseMoved="#refreshCourses" prefHeight="25.0" prefWidth="300.0" promptText="Escoja un curso para ver los cuestionarios" AnchorPane.rightAnchor="10.0" />
       <Button layoutX="14.0" layoutY="557.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#importQuestionnairesList" prefHeight="30.0" prefWidth="162.0" text="Importar Lista" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
       <Button layoutX="188.0" layoutY="557.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#exportQuestionnairesList" prefHeight="30.0" prefWidth="162.0" text="Exportar Lista" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="190.0" />
    </children>
