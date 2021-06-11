@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Questionnaire extends Activity {
 
@@ -9,6 +10,12 @@ public class Questionnaire extends Activity {
 	public Questionnaire(String topic, int percentage, String content, LocalDate date, int attempts) {
 		super(topic, percentage, content, date);
 		this.setAttempts(attempts);
+	}
+	
+	public Questionnaire(String topic, int percentage, String content, LocalDate date, int attempts, ArrayList<String> helpLinks) {
+		super(topic, percentage, content, date);
+		this.setAttempts(attempts);
+		super.setHelpLinks(getHelpLinks());
 	}
 
 	/**
