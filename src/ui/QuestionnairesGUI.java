@@ -16,11 +16,14 @@ import model.EvaluationSystem;
 import model.Questionnaire;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class QuestionnairesGUI {
 
     private EvaluationSystem evaluationSystem;
+    private Course currentCourse;
 
     @FXML
     private TableView<Questionnaire> questionnairesTableView;
@@ -59,9 +62,9 @@ public class QuestionnairesGUI {
         this.evaluationSystem = evaluationSystem;
     }
 
-    private void initializeQuestionnaireTableView (Course course) {
+    private void initializeQuestionnaireTableView () {
 
-        ObservableList<Questionnaire> list = FXCollections.observableArrayList(course.getQuestionnaires());
+        ObservableList<Questionnaire> list = FXCollections.observableArrayList(currentCourse.getQuestionnaires());
         questionnairesTableView.setItems(list);
         tcQuestionnairesName.setCellValueFactory(new PropertyValueFactory<Questionnaire, String>("topic"));
         tcQuestionnairesPercentage.setCellValueFactory(new PropertyValueFactory<Questionnaire, String>("percentage"));
@@ -73,17 +76,62 @@ public class QuestionnairesGUI {
 
     @FXML
     void cleanList(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Confirme borrado de datos");
+        dialog.setHeaderText("Por favor, escriba 'SI' si desea limpiar la lista de cuestionarios ");
+
+        // Traditional way to get the response value.
+        String input = "";
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            input = result.get();
+        }
+        if (input.equals("SI")) {
+            currentCourse.cleanQuestionnaire();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Operación exitosa");
+            alert.setHeaderText("Lista de cuestionarios eliminada");
+            alert.setContentText("Todos los cuestionarios han sido borrados existosamente. Presione OK");
+            alert.showAndWait();
+
+            initializeQuestionnaireTableView();
+            nameTextField.setDisable(true);
+            nameTextField.setText(null);
+
+            percentageTextField.setDisable(true);
+            percentageTextField.setText(null);
+
+            questionnaireContentTextArea.setDisable(true);
+            questionnaireContentTextArea.setText(null);
+
+            initialDatePicker.setDisable(true);
+            initialDatePicker.setValue(null);
+
+            attemptsSpinner.setDisable(true);
+            attemptsSpinner.setValueFactory(null);
+        }
 
     }
 
     @FXML
     void createNewQuestionnaire(ActionEvent event) {
-
+        //TODO create a createNewQuestionnaire pane and implement it here
     }
 
     @FXML
     void deleteQuestionnaire(ActionEvent event) {
+        Questionnaire questionnaire = questionnairesTableView.getSelectionModel().getSelectedItem();
 
+        if (questionnaire != null){
+            if (currentCourse.deleteQuestionnaire(questionnaire)){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Operación exitosa");
+                alert.setHeaderText("Cuestionario eliminado");
+                alert.setContentText("El cuestionario ha sido eliminado existosamente. Presione OK");
+                alert.showAndWait();
+            }
+
+        }
     }
 
     @FXML
@@ -100,7 +148,7 @@ public class QuestionnairesGUI {
         File file = fileChooser.showSaveDialog((Stage)((Node)event.getSource()).getScene().getWindow());
 
         if (file != null) {
-
+            //TODO implement the export questionnaire method.
         }
     }
 
@@ -115,7 +163,12 @@ public class QuestionnairesGUI {
         File file = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
 
         if (file != null) {
-
+            String separator = ";";
+            try {
+                currentCourse.importQuestionnaires(file.getAbsolutePath(), separator);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -151,7 +204,7 @@ public class QuestionnairesGUI {
 
     @FXML
     void showQuestionnaires(ActionEvent event) {
-        Course course = coursesComboBox.getSelectionModel().getSelectedItem();
-        initializeQuestionnaireTableView(course);
+        currentCourse = coursesComboBox.getSelectionModel().getSelectedItem();
+        initializeQuestionnaireTableView();
     }
 }
