@@ -99,14 +99,12 @@
             <Font name="Gill Sans MT Bold" size="20.6" />
          </font>
       </Label>
-      <Button layoutX="118.0" layoutY="560.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#importAssessmentsList" prefHeight="30.0" prefWidth="100.0" text="Importar Lista" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="118.0" />
-      <Button layoutX="10.0" layoutY="556.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#exportAssessmentsList" prefHeight="30.0" prefWidth="100.0" text="Exportar Lista" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
       <Button layoutX="483.0" layoutY="555.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#createNewAssessment" text="Crea un nuevo taller" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
             <Font name="Gill Sans MT" size="16.0" />
          </font>
       </Button>
-      <Button disable="true" layoutX="391.0" layoutY="555.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkAnswers" text="Ver respuestas" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="180.0">
+      <Button fx:id="checkAnswersButton" disable="true" layoutX="391.0" layoutY="555.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkAnswers" text="Ver respuestas" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="180.0">
          <font>
             <Font name="Gill Sans MT" size="16.0" />
          </font>
