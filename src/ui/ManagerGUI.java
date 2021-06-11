@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -22,10 +23,7 @@ import model.Exam;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class ManagerGUI {
 
@@ -58,7 +56,24 @@ public class ManagerGUI {
     private void initializeComboBox () {
         courses = evaluationSystem.getLogged().getCourses();
         ObservableList<Course> list = FXCollections.observableArrayList(courses);
-        coursesComboBox.setItems(list);
+        System.out.println("Lista: " + list);
+        if (list != null) {
+            coursesComboBox.setItems(list);
+        }
+    }
+
+    @FXML
+    void createNewCourse(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Curso");
+        dialog.setHeaderText("Crear Nuevo Curso");
+        dialog.setContentText("Por favor, ingresa el nombre del curso a crear:");
+
+        // Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            evaluationSystem.getLogged().addCourse(result.get());
+        }
     }
 
     @FXML
@@ -100,7 +115,6 @@ public class ManagerGUI {
     @FXML
     void showCoursesPane(ActionEvent event) {
         Course selectedCourse = coursesComboBox.getSelectionModel().getSelectedItem();
-        coursesGUI.initialize(selectedCourse);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/course-pane.fxml"));
 
@@ -116,6 +130,10 @@ public class ManagerGUI {
         AnchorPane.setBottomAnchor(coursesPane, 0.0);
         AnchorPane.setLeftAnchor(coursesPane, 0.0);
         AnchorPane.setRightAnchor(coursesPane, 0.0);
+
+        if(selectedCourse != null)
+            coursesGUI.initialize(selectedCourse);
+
     }
 
     @FXML
@@ -168,7 +186,6 @@ public class ManagerGUI {
 
     @FXML
     void updateCoursesComboBox(MouseEvent event) {
-        System.out.println("Drag on");
         initializeComboBox();
     }
 
