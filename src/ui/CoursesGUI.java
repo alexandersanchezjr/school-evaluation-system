@@ -160,6 +160,8 @@ public class CoursesGUI {
                     alert.setHeaderText("Estudiante creado");
                     alert.setContentText("El estudiante ha sido creado existosamente. Presione OK");
                     alert.showAndWait();
+
+                    initializeStudentTableView();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
