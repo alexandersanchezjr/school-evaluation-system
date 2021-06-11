@@ -208,9 +208,18 @@ public class Course {
 	
 	//Add Questionnaire
 	
-	public boolean addActivity(String topic, int percentage, String content, LocalDate date, int attempts) {
+	public boolean addQuestionnaire(String topic, int percentage, String content, LocalDate date, int attempts) {
 		boolean added = false;
 		Activity newQuestionnaire = new Questionnaire(topic, percentage, content, date, attempts);
+		if(!activities.contains(newQuestionnaire)) {
+			added = activities.add(newQuestionnaire);
+		}
+		return added;
+	}
+	
+	public boolean addQuestionnaire(String topic, int percentage, String content, LocalDate date, int attempts, ArrayList<String> helpLinks) {
+		boolean added = false;
+		Activity newQuestionnaire = new Questionnaire(topic, percentage, content, date, attempts, helpLinks);
 		if(!activities.contains(newQuestionnaire)) {
 			added = activities.add(newQuestionnaire);
 		}
@@ -249,9 +258,18 @@ public class Course {
 	
 	//Add WorkShop
 	
-	public boolean addActivity(String topic, int percentage, String content, LocalDate date, String answers) {
+	public boolean addWorkshop(String topic, int percentage, String content, LocalDate date, String answers) {
 		boolean added = false;
 		Activity newWorkshop = new Workshop(topic, percentage, content, date, answers);
+		if(!activities.contains(newWorkshop)) {
+			added = activities.add(newWorkshop);
+		}
+		return added;
+	}
+	
+	public boolean addWorkshop(String topic, int percentage, String content, LocalDate date, String answers, ArrayList<String> helpLinks) {
+		boolean added = false;
+		Activity newWorkshop = new Workshop(topic, percentage, content, date, answers, helpLinks);
 		if(!activities.contains(newWorkshop)) {
 			added = activities.add(newWorkshop);
 		}
@@ -344,7 +362,7 @@ public class Course {
 	public void importWorkshops(String fileName, String separator) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
-		while (line!=null ) {
+		while (line != null ) {
 			String[] parts = line.split(separator);
 			String topic = parts[0];
 			int percentage = Integer.parseInt(parts[1]);
@@ -353,7 +371,11 @@ public class Course {
 			LocalDate date = LocalDate.parse(cs);
 			//TODO import the list of helpLinks
 			String answers = parts[4];
-			addActivity(topic, percentage, content, date, answers);
+			ArrayList<String> helpLinks = new ArrayList<>();
+			for(int i = 5; i < parts.length; i++) {
+				helpLinks.add(parts[i]);
+			}
+			addWorkshop(topic, percentage, content, date, answers, helpLinks);
 			line = br.readLine();
 		}
 		br.close();
@@ -369,9 +391,12 @@ public class Course {
 			String content = parts[2];
 			CharSequence cs = parts[3].subSequence(0, parts[3].length());
 			LocalDate date = LocalDate.parse(cs);
-			//TODO import the list of helpLinks
 			int attempts = Integer.parseInt(parts[4]);
-			addActivity(topic, percentage, content, date, attempts);
+			ArrayList<String> helpLinks = new ArrayList<>();
+			for(int i = 5; i < parts.length; i++) {
+				helpLinks.add(parts[i]);
+			}
+			addQuestionnaire(topic, percentage, content, date, attempts, helpLinks);
 			line = br.readLine();
 		}
 		br.close();
@@ -379,17 +404,32 @@ public class Course {
 	
 	//EXPORT ACTIVITIES
 	
-	public void exportActivities(String fileName, String separator) throws FileNotFoundException {
+	public void exportWorkshops(String fileName, String separator) throws FileNotFoundException {
 		PrintWriter pw = new PrintWriter(fileName);
-		for(int j = 0; j < activities.size(); j++){
-    		if(activities.get(j) instanceof Workshop) {
-    			Workshop ws = (Workshop) activities.get(j);
-    			//TODO export the list of helpLinks
-    			pw.write(ws.getTopic() + separator + ws.getPercentage() + separator + ws.getContent() + separator + ws.getAssignmentDate() + separator + ws.getAnswers()); 
-    		}else if(activities.get(j) instanceof Questionnaire) {
-    			Questionnaire quest = (Questionnaire) activities.get(j);
-    			//TODO export the list of helpLinks
-    			pw.write(quest.getTopic() + separator + quest.getPercentage() + separator + quest.getContent() + separator + quest.getAssignmentDate() + separator + quest.getAttempts());
+		for(int i = 0; i < activities.size(); i++){
+    		if(activities.get(i) instanceof Workshop) {
+    			Workshop ws = (Workshop) activities.get(i);
+    			String helpLinks = "";
+    			for(int j = 0; j < ws.getHelpLinks().size(); j++) {
+    				helpLinks += separator + ws.getHelpLinks().get(i);
+    			}
+    			pw.write(ws.getTopic() + separator + ws.getPercentage() + separator + ws.getContent() + separator + ws.getAssignmentDate() + separator + ws.getAnswers() + helpLinks); 
+		
+    		}
+		}
+		pw.close();
+	}
+	
+	public void exportQuestionnaires(String fileName, String separator) throws FileNotFoundException {
+		PrintWriter pw = new PrintWriter(fileName);
+		for(int i = 0; i < activities.size(); i++){
+			if(activities.get(i) instanceof Questionnaire) {
+    			Questionnaire quest = (Questionnaire) activities.get(i);
+    			String helpLinks = "";
+    			for(int j = 0; j < quest.getHelpLinks().size(); j++) {
+    				helpLinks += separator + quest.getHelpLinks().get(i);
+    			}
+    			pw.write(quest.getTopic() + separator + quest.getPercentage() + separator + quest.getContent() + separator + quest.getAssignmentDate() + separator + quest.getAttempts() + helpLinks);
     		}
 		}
 		pw.close();
