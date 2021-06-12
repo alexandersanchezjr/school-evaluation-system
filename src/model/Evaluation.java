@@ -1,7 +1,13 @@
 package model;
 
-public class Evaluation {
+import java.io.Serializable;
+
+public class Evaluation implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String topic;
 	private int percentage;
 	private String content;

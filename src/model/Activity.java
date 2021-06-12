@@ -1,10 +1,15 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Activity extends Evaluation {
+public class Activity extends Evaluation implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LocalDate assignmentDate;
 	private ArrayList<String> helpLinks;
 

@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class EvaluationSystem implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	public final String EVALUATION_SYSTEM_FILE_NAME = "data/evaluation-system.cdr";
+	public final String EVALUATION_SYSTEM_FILE_NAME = "data/evaluation-system.sys";
 
 	//ATTRIBUTES
 	
@@ -66,11 +66,13 @@ public class EvaluationSystem implements Serializable{
 	* @param email The e-mail of the new teacher.
 	* @param code The institutional code assigned to the new teacher.
 	* @param fullTime The type of the new teacher (boolean value, full time or half-time).
+	 * @throws IOException 
 	*/
-	public void addTeacher(String name, String lastName, String email, String code, String password, boolean fullTime, String career, int contEvaluations) {
+	public void addTeacher(String name, String lastName, String email, String code, String password, boolean fullTime, String career, int contEvaluations) throws IOException {
 		Teacher newTeacher = new Teacher(name, lastName, email, code, password, fullTime, career, contEvaluations);
 		if(firstTeacher == null) {
 			firstTeacher = newTeacher;
+			saveEvaluationSystemData();
 		}else {
 			addTeacher(firstTeacher, newTeacher);
 		}
@@ -81,31 +83,35 @@ public class EvaluationSystem implements Serializable{
 	* <b>post:</b> Has been added a new teacher to the system if and only if the new teacher did not exist previously. 
 	* @param newTeacher The new teacher to be added. current != null.
 	* @param current The linked list teacher which will be traverse.
+	 * @throws IOException 
 	*/
-	private void addTeacher(Teacher current, Teacher newTeacher) {
+	private void addTeacher(Teacher current, Teacher newTeacher) throws IOException {
 		if(current.getNext() == null) {
 			current.setNext(newTeacher);
+			saveEvaluationSystemData();
 		}else {
 			addTeacher(current.getNext(), newTeacher);
 		}
 	}
 	
 	//Update Teacher Info
-	public void updateTeacher(String name, String lastName, String email, String code, String password, boolean fullTime) {
+	public void updateTeacher(String name, String lastName, String email, String code, String password, boolean fullTime) throws IOException {
 		logged.setName(name);
 		logged.setLastName(lastName);
 		logged.setEmail(email);
 		logged.setCode(code);
 		logged.setPassword(password);
 		logged.setFullTime(fullTime);
+		saveEvaluationSystemData();
 	}
 	
 	//Remove Logged Teacher
 	
 	@SuppressWarnings("unused")
-	public void removeTeacher() {
+	public void removeTeacher() throws IOException {
 		Teacher thisTeacher = searchTeacher(logged.getCode());
 		thisTeacher = null;
+		saveEvaluationSystemData();
 	}
 	
 	//Search Teacher

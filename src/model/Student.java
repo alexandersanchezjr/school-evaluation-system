@@ -1,9 +1,20 @@
 package model;
 
-public class Student extends Member {
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
+public class Student extends Member implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double finalAverageGrade;
 	//private int contEvaluations;
+	
+	private Student parent;
+	private Student left;
+	private Student right;
 	
 	public Student(String name, String lastName, String email, String code) {
 		super(name, lastName, email, code);
@@ -27,6 +38,52 @@ public class Student extends Member {
 	 */
 	public void setFinalAverageGrade(double finalAverageGrade) {
 		this.finalAverageGrade = finalAverageGrade;
+	}
+
+	/**
+	 * @return the parent
+	 */
+	public Student getParent() {
+		return parent;
+	}
+
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(Student parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * @return the left
+	 */
+	public Student getLeft() {
+		return left;
+	}
+
+	/**
+	 * @param left the left to set
+	 */
+	public void setLeft(Student left) {
+		this.left = left;
+	}
+
+	/**
+	 * @return the right
+	 */
+	public Student getRight() {
+		return right;
+	}
+
+	/**
+	 * @param right the right to set
+	 */
+	public void setRight(Student right) {
+		this.right = right;
+	}
+	
+	public String nodeToString(String separator) {
+		return getName() + separator + getLastName() + separator + getCode() + separator + getFinalAverageGrade() + separator + LocalDateTime.now();
 	}
 	
 //	public void increaseContEvaluation() {
