@@ -6,10 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
@@ -26,6 +29,10 @@ public class AssessmentsGUI {
 
     private EvaluationSystem evaluationSystem;
     private Course selectedCourse;
+    private NewAssessmentGUI newAssessmentGUI;
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private TableView<Workshop> assessmentsTableView;
@@ -52,13 +59,17 @@ public class AssessmentsGUI {
     private DatePicker initialDatePicker;
 
     @FXML
+    private Button createNewAssessmentButton;
+
+    @FXML
     private Button checkAnswersButton;
 
     @FXML
     private ComboBox<Course> coursesComboBox;
 
-    public AssessmentsGUI(EvaluationSystem evaluationSystem) {
-        this.evaluationSystem = evaluationSystem;
+    public AssessmentsGUI(EvaluationSystem es) {
+        evaluationSystem = es;
+        newAssessmentGUI = new NewAssessmentGUI();
 
     }
 
@@ -165,7 +176,22 @@ public class AssessmentsGUI {
 
     @FXML
     void createNewAssessment(ActionEvent event) {
-        //TODO create a create new assessment pane and implement it
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-assessment-pane.fxml"));
+
+        fxmlLoader.setController(newAssessmentGUI);
+        Parent newQuestionnairePane = null;
+        try {
+            newQuestionnairePane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mainPane.getChildren().setAll(newQuestionnairePane);
+        AnchorPane.setTopAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setBottomAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setLeftAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setRightAnchor(newQuestionnairePane, 0.0);
+
+        newAssessmentGUI.initialize(selectedCourse);
     }
 
     @FXML
@@ -207,6 +233,11 @@ public class AssessmentsGUI {
     @FXML
     void showAssessments(ActionEvent event) {
         selectedCourse = coursesComboBox.getSelectionModel().getSelectedItem();
-        initializeAssessmentTableView();
+        if (selectedCourse != null) {
+            createNewAssessmentButton.setDisable(false);
+            initializeAssessmentTableView();
+        }else {
+            createNewAssessmentButton.setDisable(true);
+        }
     }
 }
