@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class Workshop extends Activity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String answers;
 	
 	public Workshop(String topic, int percentage, String content, LocalDate date, String answers) {
