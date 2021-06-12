@@ -1,9 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Teacher extends Member {
+public class Teacher extends Member implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String password;
 	private boolean fullTime; //If this boolean value is true it means this teacher is full time, else he's half time teacher.
 	private String career;
