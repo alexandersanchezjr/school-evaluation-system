@@ -84,7 +84,7 @@
                         <Font name="Gill Sans MT" size="16.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="updateExamButton" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#updateExam" prefHeight="30.0" prefWidth="162.0" text="Actualizar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="updateExamButton" disable="true" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#updateExam" prefHeight="30.0" prefWidth="162.0" text="Actualizar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
