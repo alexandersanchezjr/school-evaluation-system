@@ -33,24 +33,24 @@
                   <Font name="Gill Sans MT" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="newAssessmentNameTextField" disable="true" promptText="Nombre" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="newAssessmentNameTextField" promptText="Nombre" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="Gill Sans MT" size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="newAssessmentPercentageTextField" disable="true" promptText="\%" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="newAssessmentPercentageTextField" promptText="\%" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="Gill Sans MT" size="16.0" />
                </font>
             </TextField>
-            <TextArea fx:id="newAssessmentContentTextArea" disable="true" prefHeight="339.0" prefWidth="491.0" GridPane.rowIndex="4" />
+            <TextArea fx:id="newAssessmentContentTextArea" prefHeight="339.0" prefWidth="491.0" GridPane.rowIndex="4" />
             <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido del taller" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
                   <Font name="Gill Sans MT" size="20.0" />
                </font>
             </Label>
-            <DatePicker fx:id="newInitialDatePicker" disable="true" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Inicio" GridPane.rowIndex="2" />
-            <TextArea fx:id="newAssessmentContentTextArea1" disable="true" prefHeight="339.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="newInitialDatePicker" editable="false" maxWidth="1.7976931348623157E308" promptText="Fecha Inicio" GridPane.rowIndex="2" />
+            <TextArea fx:id="newAssessmentAnswersTextArea" prefHeight="339.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Respuestas al taller" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="Gill Sans MT" size="20.0" />
