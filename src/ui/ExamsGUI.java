@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
+import exceptions.EmptyEvaluationException;
+
 public class ExamsGUI {
 
     private EvaluationSystem evaluationSystem;
@@ -166,7 +168,15 @@ public class ExamsGUI {
                 currentCourse.importExams(file.getAbsolutePath(), separator);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            } catch (EmptyEvaluationException e) {
+				// TODO Auto-generated catch block
+            	Alert alert = new Alert(Alert.AlertType.ERROR);
+    			alert.setTitle("EmptyEvaluationException");
+    			alert.setHeaderText("No ha sido posible importar todos los examenes");
+    			alert.setContentText("Hay examen(es) sin contenido. \n\nInténtelo de nuevo.");
+    			alert.showAndWait();
+				e.printStackTrace();
+			}
 
         }
     }
