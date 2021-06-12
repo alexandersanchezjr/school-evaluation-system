@@ -65,7 +65,8 @@ public class ManagerGUI {
             public void handle(WindowEvent event) {
                 System.out.println("Closing the window!");
                 try {
-                    evaluationSystem.saveEvaluationSystemData();
+                    evaluationSystem.saveEvaluationSystemData(evaluationSystem);
+                    Platform.exit();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

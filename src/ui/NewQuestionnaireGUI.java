@@ -1,14 +1,12 @@
 package ui;
 
+import exceptions.EmptyEvaluationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Course;
-import model.EvaluationSystem;
 
 import java.time.LocalDate;
-
-import exceptions.EmptyEvaluationException;
 
 public class NewQuestionnaireGUI {
 
@@ -37,7 +35,6 @@ public class NewQuestionnaireGUI {
 
     @FXML
     void createQuestionnaire(ActionEvent event) {
-
         if(!hasEmptyField()){
             String topic = newNameTextField.getText();
             int percentage = Integer.parseInt(newPercentageTextField.getText());
@@ -46,18 +43,20 @@ public class NewQuestionnaireGUI {
             int attempts = newAttemptsSpinner.getValue();
 
             try {
-				if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
-
-				}
-			} catch (EmptyEvaluationException e) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("EmptyEvaluationException");
-				alert.setHeaderText("No ha sido posible agregar el nuveo cuestionario");
-				alert.setContentText(e.getMessage() + "\n\nInt�ntelo de nuevo.");
-				alert.showAndWait();
-				e.printStackTrace();
-			}
-
+                if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
+                	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Crear Cuestionario");
+                    alert.setHeaderText("El cuestionario ha sido creado exitosamente");
+                    alert.setContentText("Presione OK");
+                    alert.showAndWait();
+                }
+            } catch (EmptyEvaluationException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("EmptyEvaluationException");
+                alert.setHeaderText("Evaluación sin contenido");
+                alert.setContentText("No se puede crear una evaluación sin contenido. \n\nInténtelo de nuevo.");
+                alert.showAndWait();
+            }
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campos Vacíos");
