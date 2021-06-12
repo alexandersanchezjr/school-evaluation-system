@@ -4,10 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Activity;
@@ -18,12 +22,17 @@ import model.Questionnaire;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class QuestionnairesGUI {
 
+    private NewQuestionnaireGUI newQuestionnaireGUI;
     private EvaluationSystem evaluationSystem;
     private Course currentCourse;
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private TableView<Questionnaire> questionnairesTableView;
@@ -58,8 +67,9 @@ public class QuestionnairesGUI {
     @FXML
     private ComboBox<Course> coursesComboBox;
 
-    public QuestionnairesGUI(EvaluationSystem evaluationSystem) {
-        this.evaluationSystem = evaluationSystem;
+    public QuestionnairesGUI(EvaluationSystem es) {
+        evaluationSystem = es;
+        newQuestionnaireGUI = new NewQuestionnaireGUI();
     }
 
     private void initializeQuestionnaireTableView () {
@@ -115,7 +125,20 @@ public class QuestionnairesGUI {
 
     @FXML
     void createNewQuestionnaire(ActionEvent event) {
-        //TODO create a createNewQuestionnaire pane and implement it here
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-questionnaire-pane.fxml"));
+
+        fxmlLoader.setController(newQuestionnaireGUI);
+        Parent newQuestionnairePane = null;
+        try {
+            newQuestionnairePane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mainPane.getChildren().setAll(newQuestionnairePane);
+        AnchorPane.setTopAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setBottomAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setLeftAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setRightAnchor(newQuestionnairePane, 0.0);
     }
 
     @FXML
@@ -169,6 +192,19 @@ public class QuestionnairesGUI {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    void refreshCourses(MouseEvent event) {
+        initializeCourses();
+    }
+
+    private void initializeCourses() {
+        ArrayList<Course> courses = evaluationSystem.getLogged().getCourses();
+        ObservableList<Course> list = FXCollections.observableArrayList(courses);
+        if (list != null) {
+            coursesComboBox.setItems(list);
         }
     }
 
