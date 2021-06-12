@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import exceptions.EmptyEvaluationException;
+import exceptions.ExistingCodeException;
+
 public class Course implements Serializable{
 
 	/**
@@ -141,11 +144,14 @@ public class Course implements Serializable{
 		this.averageGrades = averageGrades;
 	}
 
-	public boolean addStudent(String name, String lastName, String email, String code) throws IOException {
+	public boolean addStudent(String name, String lastName, String email, String code) throws IOException, ExistingCodeException {
 		boolean added = false;
 		Student newStudent = new Student(name, lastName, email, code);
 		if(!students.contains(newStudent)) {
 			added = students.add(newStudent);
+		}
+		if(searchStudent(code) != null) {
+			throw new ExistingCodeException(code);
 		}
 		return added;
 	}
@@ -209,15 +215,43 @@ public class Course implements Serializable{
         return key;
     }
 	
+	public void sortByLastName() {
+		for(int i = 1; i < students.size(); i++) {
+			int j = i;
+			Student st = students.get(i);
+			while(j >= 0 && (st.compareByLastName(students.get(j))) > 0) {
+				students.set(j+1, students.get(j));
+				j--;
+			}
+			students.set(j+1, st);
+		}
+	}
+	
+	public void sortByFinalGrade() {
+		for(int i = 1; i < students.size(); i++) {
+			int j = i;
+			Student st = students.get(i);
+			while(j >= 0 && (st.compareByFinalGrade(students.get(j))) < 0) {
+				students.set(j+1, students.get(j));
+				j--;
+			}
+			students.set(j+1, st);
+		}
+	}
+	
 	//MANAGEMENT EVALUATIONS
 	
 	//Add Questionnaire
 	
-	public boolean addQuestionnaire(String topic, int percentage, String content, LocalDate date, int attempts) {
+	public boolean addQuestionnaire(String topic, int percentage, String content, LocalDate date, int attempts) throws EmptyEvaluationException {
 		boolean added = false;
 		Activity newQuestionnaire = new Questionnaire(topic, percentage, content, date, attempts);
 		if(!activities.contains(newQuestionnaire)) {
-			added = activities.add(newQuestionnaire);
+			if(content.isEmpty()) {
+				throw new EmptyEvaluationException();
+			}else {
+				added = activities.add(newQuestionnaire);
+			}
 		}
 		return added;
 	}
@@ -263,11 +297,15 @@ public class Course implements Serializable{
 	
 	//Add WorkShop
 	
-	public boolean addWorkshop(String topic, int percentage, String content, LocalDate date, String answers) {
+	public boolean addWorkshop(String topic, int percentage, String content, LocalDate date, String answers) throws EmptyEvaluationException {
 		boolean added = false;
 		Activity newWorkshop = new Workshop(topic, percentage, content, date, answers);
 		if(!activities.contains(newWorkshop)) {
-			added = activities.add(newWorkshop);
+			if(content.isEmpty()) {
+				throw new EmptyEvaluationException();
+			}else {
+				added = activities.add(newWorkshop);
+			}
 		}
 		return added;
 	}
@@ -313,11 +351,15 @@ public class Course implements Serializable{
 	
 	//Add Exams
 	
-	public boolean addExam(String topic, int percentage, String content, int timeLimit) {
+	public boolean addExam(String topic, int percentage, String content, int timeLimit) throws EmptyEvaluationException {
 		boolean added = false;
 		Exam newExam = new Exam(topic, percentage, content, timeLimit);	
 		if(!exams.contains(newExam)) {
-			added = exams.add(newExam);
+			if(content.isEmpty()) {
+				throw new EmptyEvaluationException();
+			}else {
+				added = exams.add(newExam);
+			}
 		}
 		return added;
 	}
@@ -333,6 +375,15 @@ public class Course implements Serializable{
 	}
 	
 	//Delete Exam
+	
+	public boolean deleteExam(Exam e) throws IOException {
+		boolean deleted = false;
+		if(exams.contains(e)) {
+			deleted = exams.remove(e);
+		}
+		return deleted;
+	}
+	
 	
 	//IMPORT STUDENTS
 	
@@ -442,7 +493,7 @@ public class Course implements Serializable{
 		
 	//IMPORT EXAMS
 	
-	public void importExams(String fileName, String separator) throws IOException {
+	public void importExams(String fileName, String separator) throws IOException, EmptyEvaluationException {
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
 		while (line!=null ) {
