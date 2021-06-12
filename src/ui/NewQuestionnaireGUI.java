@@ -8,6 +8,8 @@ import model.EvaluationSystem;
 
 import java.time.LocalDate;
 
+import exceptions.EmptyEvaluationException;
+
 public class NewQuestionnaireGUI {
 
     private Course currentCourse;
@@ -43,9 +45,18 @@ public class NewQuestionnaireGUI {
             LocalDate date = newInitialDatePicker.getValue();
             int attempts = newAttemptsSpinner.getValue();
 
-            if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
+            try {
+				if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
 
-            }
+				}
+			} catch (EmptyEvaluationException e) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("EmptyEvaluationException");
+				alert.setHeaderText("No ha sido posible agregar el nuveo cuestionario");
+				alert.setContentText(e.getMessage() + "\n\nInténtelo de nuevo.");
+				alert.showAndWait();
+				e.printStackTrace();
+			}
 
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
