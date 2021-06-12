@@ -72,7 +72,6 @@ public class EvaluationSystem implements Serializable{
 		Teacher newTeacher = new Teacher(name, lastName, email, code, password, fullTime, career, contEvaluations);
 		if(firstTeacher == null) {
 			firstTeacher = newTeacher;
-			saveEvaluationSystemData();
 		}else {
 			addTeacher(firstTeacher, newTeacher);
 		}
@@ -88,7 +87,6 @@ public class EvaluationSystem implements Serializable{
 	private void addTeacher(Teacher current, Teacher newTeacher) throws IOException {
 		if(current.getNext() == null) {
 			current.setNext(newTeacher);
-			saveEvaluationSystemData();
 		}else {
 			addTeacher(current.getNext(), newTeacher);
 		}
@@ -102,7 +100,6 @@ public class EvaluationSystem implements Serializable{
 		logged.setCode(code);
 		logged.setPassword(password);
 		logged.setFullTime(fullTime);
-		saveEvaluationSystemData();
 	}
 	
 	//Remove Logged Teacher
@@ -111,7 +108,6 @@ public class EvaluationSystem implements Serializable{
 	public void removeTeacher() throws IOException {
 		Teacher thisTeacher = searchTeacher(logged.getCode());
 		thisTeacher = null;
-		saveEvaluationSystemData();
 	}
 	
 	//Search Teacher
@@ -178,9 +174,9 @@ public class EvaluationSystem implements Serializable{
 	
 	//Serialization 
 	
-	public void saveEvaluationSystemData() throws IOException {
+	public void saveEvaluationSystemData(EvaluationSystem es) throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(EVALUATION_SYSTEM_FILE_NAME));
-		oos.writeObject(this);
+		oos.writeObject(es);
 		oos.close();
 	}
 	
