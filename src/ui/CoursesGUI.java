@@ -19,6 +19,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
+import exceptions.ExistingCodeException;
+
 public class CoursesGUI {
 
 
@@ -165,7 +167,15 @@ public class CoursesGUI {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            } catch (ExistingCodeException e) {
+				// TODO Auto-generated catch block
+            	Alert alert = new Alert(Alert.AlertType.ERROR);
+    			alert.setTitle("ExistingCodeException");
+    			alert.setHeaderText("No ha sido posible crear el nuevo estudiante");
+    			alert.setContentText(e.getMessage() + "\n\nInténtelo de nuevo.");
+    			alert.showAndWait();
+				e.printStackTrace();
+			}
         }
     }
 
