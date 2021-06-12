@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import model.Evaluation;
 import model.EvaluationSystem;
 import model.Teacher;
 
@@ -48,12 +50,15 @@ public class LoginGUI {
 
             @Override
             public void handle(WindowEvent event) {
-                System.out.println("Closing the window!");
+                EvaluationSystem es = evaluationSystem;
                 try {
-                    evaluationSystem.saveEvaluationSystemData();
+                    es.saveEvaluationSystemData(evaluationSystem);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                System.out.println("Closing the window!");
+                Platform.exit();
+
             }
         });
     }
