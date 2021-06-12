@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Teacher extends Member implements Serializable{
 
@@ -199,4 +201,25 @@ public class Teacher extends Member implements Serializable{
 		}
 		return courseSearched;
 	}
+	
+	public Course binarySearchCourse(String courseName) {
+		Comparator<Course> name = new Comparator<Course>() {
+			@Override
+            public int compare(Course obj1, Course obj2) {
+                String n1 = obj1.getCourseName().toLowerCase();
+                String n2 = obj2.getCourseName().toLowerCase();
+
+                return n2.compareTo(n1);
+            }
+        };
+
+        Course key = new Course(courseName);
+        int index = Collections.binarySearch(getCourses(), key, name);
+        if (index < 0){
+            key = null;
+        }else {
+            key = getCourses().get(index);
+        }
+        return key;
+    }
 }

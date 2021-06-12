@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class Questionnaire extends Activity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int attempts;
 	
 	public Questionnaire(String topic, int percentage, String content, LocalDate date, int attempts) {

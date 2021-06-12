@@ -39,7 +39,21 @@ public class Student extends Member implements Serializable {
 	public void setFinalAverageGrade(double finalAverageGrade) {
 		this.finalAverageGrade = finalAverageGrade;
 	}
-
+	
+	public int compareByLastName(Student s1) {
+		return getLastName().compareToIgnoreCase(s1.getLastName());
+	}
+	
+	public int compareByFinalGrade(Student other) {
+		if(finalAverageGrade == other.getFinalAverageGrade()) {
+			return 0;
+		}else if(finalAverageGrade > other.getFinalAverageGrade()) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+		
 	/**
 	 * @return the parent
 	 */
