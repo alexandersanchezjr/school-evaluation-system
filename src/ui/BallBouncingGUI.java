@@ -1,4 +1,4 @@
-package model;
+package ui;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
