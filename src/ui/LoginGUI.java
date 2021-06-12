@@ -37,7 +37,7 @@ public class LoginGUI {
 
     public LoginGUI(EvaluationSystem evaluationSystem, Stage w) {
         this.evaluationSystem = evaluationSystem;
-        managerGUI = new ManagerGUI(evaluationSystem, this);
+        managerGUI = new ManagerGUI(evaluationSystem, this, w);
         registerGUI = new RegisterGUI(evaluationSystem, this);
         window = w;
     }
@@ -76,6 +76,7 @@ public class LoginGUI {
             window.setScene(managerScene);
             window.show();
             managerGUI.timer();
+            managerGUI.initialize();
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Inicio de sesión erróneo");
