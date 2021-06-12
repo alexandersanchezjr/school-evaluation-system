@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.EmptyEvaluationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -43,8 +44,16 @@ public class NewQuestionnaireGUI {
             LocalDate date = newInitialDatePicker.getValue();
             int attempts = newAttemptsSpinner.getValue();
 
-            if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
+            try {
+                if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
 
+                }
+            } catch (EmptyEvaluationException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("EmptyEvaluationException");
+                alert.setHeaderText("Evaluación sin contenido");
+                alert.setContentText("No se puede crear una evaluación sin contenido. \n\nInténtelo de nuevo.");
+                alert.showAndWait();
             }
 
         }else {
