@@ -13,6 +13,7 @@ import java.util.Comparator;
 
 import exceptions.EmptyEvaluationException;
 import exceptions.ExistingCodeException;
+import exceptions.OutOfDateException;
 
 public class Course implements Serializable{
 
@@ -243,12 +244,14 @@ public class Course implements Serializable{
 	
 	//Add Questionnaire
 	
-	public boolean addQuestionnaire(String topic, int percentage, String content, LocalDate date, int attempts) throws EmptyEvaluationException {
+	public boolean addQuestionnaire(String topic, int percentage, String content, LocalDate date, int attempts) throws EmptyEvaluationException, OutOfDateException {
 		boolean added = false;
 		Activity newQuestionnaire = new Questionnaire(topic, percentage, content, date, attempts);
 		if(!activities.contains(newQuestionnaire)) {
 			if(content.isEmpty()) {
 				throw new EmptyEvaluationException();
+			}else if(date.isBefore(LocalDate.now())){
+				throw new OutOfDateException();
 			}else {
 				added = activities.add(newQuestionnaire);
 			}
@@ -297,12 +300,14 @@ public class Course implements Serializable{
 	
 	//Add WorkShop
 	
-	public boolean addWorkshop(String topic, int percentage, String content, LocalDate date, String answers) throws EmptyEvaluationException {
+	public boolean addWorkshop(String topic, int percentage, String content, LocalDate date, String answers) throws EmptyEvaluationException, OutOfDateException {
 		boolean added = false;
 		Activity newWorkshop = new Workshop(topic, percentage, content, date, answers);
 		if(!activities.contains(newWorkshop)) {
 			if(content.isEmpty()) {
 				throw new EmptyEvaluationException();
+			}else if(date.isBefore(LocalDate.now())){
+				throw new OutOfDateException();
 			}else {
 				added = activities.add(newWorkshop);
 			}
