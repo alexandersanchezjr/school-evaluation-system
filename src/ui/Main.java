@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.EvaluationSystem;
 
@@ -19,7 +20,11 @@ public class Main extends Application {
 		try {
 			evaluationSystem.loadEvaluationSystemData(evaluationSystem);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("FileNotFoundException");
+			alert.setHeaderText("No se han podido cargar los datos");
+			alert.setContentText("El programa no ha encontrado evaluation-system.sys. \n\nInténtelo de nuevo.");
+			alert.showAndWait();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
