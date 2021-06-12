@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Course;
 import model.EvaluationSystem;
 import model.Exam;
@@ -34,6 +36,7 @@ public class ManagerGUI {
     private ExamsGUI examsGUI;
     private CoursesGUI coursesGUI;
     private ArrayList<Course> courses;
+    private Stage window;
 
     @FXML
     private Label timeLabel;
@@ -44,13 +47,30 @@ public class ManagerGUI {
     @FXML
     private ComboBox<Course> coursesComboBox;
 
-    public ManagerGUI(EvaluationSystem evaluationSystem, LoginGUI loginGUI) {
+    public ManagerGUI(EvaluationSystem evaluationSystem, LoginGUI loginGUI, Stage w) {
         this.evaluationSystem = evaluationSystem;
         this.loginGUI = loginGUI;
         assessmentsGUI = new AssessmentsGUI(evaluationSystem);
         questionnairesGUI = new QuestionnairesGUI(evaluationSystem);
         examsGUI = new ExamsGUI(evaluationSystem);
         coursesGUI = new CoursesGUI(evaluationSystem);
+        window = w;
+    }
+
+    public void initialize() {
+
+        window.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+            @Override
+            public void handle(WindowEvent event) {
+                System.out.println("Closing the window!");
+                try {
+                    evaluationSystem.saveEvaluationSystemData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initializeComboBox () {
