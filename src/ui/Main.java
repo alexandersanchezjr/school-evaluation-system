@@ -11,16 +11,13 @@ import java.io.*;
 
 public class Main extends Application {
 
-	public final String SYSTEM_FILE_NAME = "data/system.sys";
-
 	private LoginGUI loginGUI;
 	private EvaluationSystem evaluationSystem;
 
 	public Main () {
 		evaluationSystem = new EvaluationSystem();
-		loginGUI = new LoginGUI(evaluationSystem);
 		try {
-			loadSystemData();
+			evaluationSystem.loadEvaluationSystemData(evaluationSystem);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -49,6 +46,8 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		loginGUI = new LoginGUI(evaluationSystem, primaryStage);
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
 
 		fxmlLoader.setController(loginGUI);
@@ -61,18 +60,5 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
-	public void saveSystemData() throws IOException {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SYSTEM_FILE_NAME));
-		oos.writeObject(evaluationSystem);
-		oos.close();
-
-	}
-
-	public void loadSystemData() throws IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SYSTEM_FILE_NAME));
-		evaluationSystem = (EvaluationSystem) ois.readObject();
-		ois.close();
-
-	}
 
 }
