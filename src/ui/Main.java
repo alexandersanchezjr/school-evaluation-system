@@ -17,9 +17,11 @@ public class Main extends Application {
 
 	public Main () {
 		evaluationSystem = new EvaluationSystem();
+		EvaluationSystem es = evaluationSystem;
 		try {
-			evaluationSystem.loadEvaluationSystemData(evaluationSystem);
+			es.loadEvaluationSystemData(evaluationSystem);
 		} catch (IOException e) {
+			e.printStackTrace();
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("FileNotFoundException");
 			alert.setHeaderText("No se han podido cargar los datos");
