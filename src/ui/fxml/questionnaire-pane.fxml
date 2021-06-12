@@ -27,10 +27,10 @@
          <children>
             <TableView fx:id="questionnairesTableView" onMouseClicked="#showQuestionnaireInfo" prefHeight="128.0" prefWidth="516.0" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="tcQuestionnairesName" prefWidth="75.0" text="Nombre" />
-                  <TableColumn fx:id="tcQuestionnairesPercentage" prefWidth="75.0" text="\%" />
-                  <TableColumn fx:id="tcInitialDate" prefWidth="75.0" text="Fecha Inicio" />
-                  <TableColumn fx:id="tcQuestionnairesAttempts" prefWidth="75.0" text="Intentos" />
+                  <TableColumn fx:id="tcQuestionnairesName" editable="false" prefWidth="75.0" sortable="false" text="Nombre" />
+                  <TableColumn fx:id="tcQuestionnairesPercentage" editable="false" prefWidth="75.0" sortable="false" text="\%" />
+                  <TableColumn fx:id="tcInitialDate" editable="false" prefWidth="75.0" sortable="false" text="Fecha Inicio" />
+                  <TableColumn fx:id="tcQuestionnairesAttempts" editable="false" prefWidth="75.0" sortable="false" text="Intentos" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -102,7 +102,7 @@
             <Font name="Gill Sans MT Bold" size="20.6" />
          </font>
       </Label>
-      <Button layoutX="482.0" layoutY="556.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#createNewQuestionnaire" text="Crea un nuevo cuestionario" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <Button fx:id="createNewQuestionnaireButton" disable="true" layoutX="482.0" layoutY="556.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#createNewQuestionnaire" text="Crea un nuevo cuestionario" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
             <Font name="Gill Sans MT" size="16.0" />
          </font>
