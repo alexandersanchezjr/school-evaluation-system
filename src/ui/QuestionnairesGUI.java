@@ -11,17 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import model.Activity;
 import model.Course;
 import model.EvaluationSystem;
 import model.Questionnaire;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -63,6 +59,9 @@ public class QuestionnairesGUI {
 
     @FXML
     private DatePicker initialDatePicker;
+
+    @FXML
+    private Button createNewQuestionnaireButton;
 
     @FXML
     private ComboBox<Course> coursesComboBox;
@@ -139,6 +138,8 @@ public class QuestionnairesGUI {
         AnchorPane.setBottomAnchor(newQuestionnairePane, 0.0);
         AnchorPane.setLeftAnchor(newQuestionnairePane, 0.0);
         AnchorPane.setRightAnchor(newQuestionnairePane, 0.0);
+
+        newQuestionnaireGUI.initialize(currentCourse);
     }
 
     @FXML
@@ -168,7 +169,7 @@ public class QuestionnairesGUI {
 
         //Show save file dialog
 
-        File file = fileChooser.showSaveDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+        File file = fileChooser.showSaveDialog(((Node)event.getSource()).getScene().getWindow());
 
         if (file != null) {
             //TODO implement the export questionnaire method.
@@ -183,7 +184,7 @@ public class QuestionnairesGUI {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        File file = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+        File file = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
 
         if (file != null) {
             String separator = ";";
@@ -203,9 +204,7 @@ public class QuestionnairesGUI {
     private void initializeCourses() {
         ArrayList<Course> courses = evaluationSystem.getLogged().getCourses();
         ObservableList<Course> list = FXCollections.observableArrayList(courses);
-        if (list != null) {
-            coursesComboBox.setItems(list);
-        }
+        coursesComboBox.setItems(list);
     }
 
     @FXML
@@ -241,6 +240,11 @@ public class QuestionnairesGUI {
     @FXML
     void showQuestionnaires(ActionEvent event) {
         currentCourse = coursesComboBox.getSelectionModel().getSelectedItem();
-        initializeQuestionnaireTableView();
+        if (currentCourse != null) {
+            createNewQuestionnaireButton.setDisable(false);
+            initializeQuestionnaireTableView();
+        }else {
+            createNewQuestionnaireButton.setDisable(true);
+        }
     }
 }
