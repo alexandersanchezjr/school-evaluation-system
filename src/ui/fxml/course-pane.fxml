@@ -11,8 +11,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -22,7 +20,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="179.0" layoutY="45.0" prefHeight="540.0" prefWidth="521.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+      <VBox layoutX="179.0" layoutY="45.0" prefHeight="540.0" prefWidth="521.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0">
          <children>
             <TableView fx:id="studentsTableView" onMouseClicked="#showStudentInfo" prefHeight="383.0" prefWidth="561.0" VBox.vgrow="ALWAYS">
                <columns>
@@ -51,7 +49,6 @@
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="ALWAYS" />
@@ -71,15 +68,6 @@
                         <Font name="Gill Sans MT" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="updatePhotoButton" disable="true" mnemonicParsing="false" onAction="#updateStudentPhoto" prefHeight="135.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fx:id="studentPhoto" fitHeight="143.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../img/default-person.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
@@ -87,12 +75,12 @@
             </GridPane>
          </children>
       </VBox>
-      <Label fx:id="courseNameLabel" layoutY="10.0" onInputMethodTextChanged="#changeCourseName" prefHeight="25.0" text="Curso 03">
+      <Label fx:id="courseNameLabel" layoutY="10.0" onInputMethodTextChanged="#changeCourseName" prefHeight="25.0" text="Curso 03" AnchorPane.leftAnchor="10.0">
          <font>
             <Font name="Gill Sans MT Bold" size="30.0" />
          </font>
       </Label>
-      <VBox layoutY="482.0" prefWidth="162.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0">
+      <VBox layoutY="482.0" prefWidth="162.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <children>
             <Separator prefHeight="0.0" prefWidth="162.0" />
             <Button layoutX="10.0" layoutY="13.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#importStudentsList" prefHeight="30.0" prefWidth="162.0" text="Importar Lista" />
@@ -102,17 +90,8 @@
             <Insets top="20.0" />
          </padding>
       </VBox>
-      <VBox layoutY="260.0" prefWidth="162.0" spacing="10.0" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="0.0">
+      <VBox layoutY="260.0" prefWidth="162.0" spacing="10.0" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="10.0">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#chooseNewPhoto" prefHeight="201.0" prefWidth="162.0" VBox.vgrow="ALWAYS">
-               <graphic>
-                  <ImageView fx:id="newStudentPhoto" fitHeight="201.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/default-person.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Separator prefHeight="0.0" prefWidth="162.0" />
             <Label prefHeight="25.0" text="Nuevo Estudiante:">
                <font>

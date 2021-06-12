@@ -1,6 +1,7 @@
 package ui;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.EvaluationSystem;
 import model.Teacher;
 
@@ -21,6 +23,7 @@ public class LoginGUI {
     EvaluationSystem evaluationSystem;
     ManagerGUI managerGUI;
     RegisterGUI registerGUI;
+    Stage window;
 
 
     @FXML
@@ -32,10 +35,27 @@ public class LoginGUI {
     @FXML
     private PasswordField passwordField;
 
-    public LoginGUI(EvaluationSystem evaluationSystem) {
+    public LoginGUI(EvaluationSystem evaluationSystem, Stage w) {
         this.evaluationSystem = evaluationSystem;
         managerGUI = new ManagerGUI(evaluationSystem, this);
         registerGUI = new RegisterGUI(evaluationSystem, this);
+        window = w;
+    }
+
+    public void initialize() {
+
+        window.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+            @Override
+            public void handle(WindowEvent event) {
+                System.out.println("Closing the window!");
+                try {
+                    evaluationSystem.saveEvaluationSystemData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @FXML
