@@ -37,13 +37,13 @@ public class NewQuestionnaireGUI {
     @FXML
     void createQuestionnaire(ActionEvent event) {
         if(!hasEmptyField()){
-            String topic = newNameTextField.getText();
-            int percentage = Integer.parseInt(newPercentageTextField.getText());
-            String content = newQuestionnaireContentTextArea.getText();
-            LocalDate date = newInitialDatePicker.getValue();
-            int attempts = newAttemptsSpinner.getValue();
-
             try {
+                String topic = newNameTextField.getText();
+                int percentage = Integer.parseInt(newPercentageTextField.getText());
+                String content = newQuestionnaireContentTextArea.getText();
+                LocalDate date = newInitialDatePicker.getValue();
+                int attempts = newAttemptsSpinner.getValue();
+
                 if (currentCourse.addQuestionnaire(topic, percentage, content, date, attempts)){
                 	Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Crear Cuestionario");
@@ -64,7 +64,13 @@ public class NewQuestionnaireGUI {
                 alert.setContentText(e.getMessage() + "\n\nIntente ingresando otra fecha.");
                 alert.showAndWait();
             	e.printStackTrace();
-			}
+			}catch (NumberFormatException numberFormatException) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("NumberFormatException");
+                alert.setHeaderText("Formato inválido");
+                alert.setContentText("El porcentaje del cuestionario está en un formato que no es numérico. \n\nInténtelo de nuevo.");
+                alert.showAndWait();
+            }
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campos Vacíos");
@@ -75,7 +81,7 @@ public class NewQuestionnaireGUI {
     }
 
     private boolean hasEmptyField() {
-        boolean emptyField = newNameTextField.getText().isEmpty() || newPercentageTextField.getText().isEmpty() || newQuestionnaireContentTextArea.getText().isEmpty();
+        boolean emptyField = newNameTextField.getText().isEmpty() || newPercentageTextField.getText().isEmpty();
 
         if (newAttemptsSpinner.getValue() == null){
             emptyField = true;
