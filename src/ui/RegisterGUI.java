@@ -71,7 +71,7 @@ public class RegisterGUI {
     }
 
     @FXML
-    void register(ActionEvent event) {
+    void register(ActionEvent event) throws IOException {
         if(nameTextField.getText().isEmpty() || surnameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || codeTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campo vacío");
