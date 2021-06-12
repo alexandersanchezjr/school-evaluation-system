@@ -1,6 +1,7 @@
 package ui;
 
 import exceptions.EmptyEvaluationException;
+import exceptions.OutOfDateException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -56,7 +57,14 @@ public class NewQuestionnaireGUI {
                 alert.setHeaderText("Evaluación sin contenido");
                 alert.setContentText("No se puede crear una evaluación sin contenido. \n\nInténtelo de nuevo.");
                 alert.showAndWait();
-            }
+            } catch (OutOfDateException e) {
+            	Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("OutOfDateException");
+                alert.setHeaderText("Fecha fuera de rango");
+                alert.setContentText(e.getMessage() + "\n\nIntente ingresando otra fecha.");
+                alert.showAndWait();
+            	e.printStackTrace();
+			}
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campos Vacíos");
