@@ -105,7 +105,7 @@
       </Label>
       <Button layoutX="180.0" layoutY="560.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#importExamsList" prefHeight="30.0" prefWidth="162.0" text="Importar Lista" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="180.0" />
       <Button layoutY="552.0" maxWidth="-Infinity" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#exportExamsList" prefHeight="30.0" prefWidth="162.0" text="Exportar Lista" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <Button layoutX="483.0" layoutY="555.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#createNewExam" text="Crea un nuevo exámen" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <Button fx:id="createNewExamButton" disable="true" layoutX="483.0" layoutY="555.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#createNewExam" text="Crea un nuevo exámen" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
             <Font name="Gill Sans MT" size="16.0" />
          </font>
