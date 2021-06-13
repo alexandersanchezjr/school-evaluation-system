@@ -69,7 +69,7 @@ public class NewAssessmentGUI {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("NumberFormatException");
                 alert.setHeaderText("Formato inválido");
-                alert.setContentText("El porcentaje del cuestionario está en un formato que no es numérico. \n\nInténtelo de nuevo.");
+                alert.setContentText("El porcentaje del taller está en un formato que no es numérico. \n\nInténtelo de nuevo.");
                 alert.showAndWait();
             }
         }
