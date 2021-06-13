@@ -84,6 +84,12 @@ public class CoursesGUI {
     @FXML
     private TextField newStudentEmail;
 
+    @FXML
+    private TextField nameToSearch;
+
+    @FXML
+    private TextField codeToSearch;
+
     public CoursesGUI(EvaluationSystem evaluationSystem) {
         this.evaluationSystem = evaluationSystem;
     }
@@ -172,7 +178,7 @@ public class CoursesGUI {
             	Alert alert = new Alert(Alert.AlertType.ERROR);
     			alert.setTitle("ExistingCodeException");
     			alert.setHeaderText("No ha sido posible crear el nuevo estudiante");
-    			alert.setContentText(e.getMessage() + "\n\nInt�ntelo de nuevo.");
+    			alert.setContentText(e.getMessage() + "\n\nInt�ntelo de nuevo.");
     			alert.showAndWait();
 				e.printStackTrace();
 			}
@@ -250,8 +256,35 @@ public class CoursesGUI {
     }
 
     @FXML
+    void searchStudent(ActionEvent event) {
+        if(nameToSearch.getText().isEmpty() || codeToSearch.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Atención");
+            alert.setHeaderText("Campos vacíos");
+            alert.setContentText("Por favor, rellene todos los campos para buscar un estudiante");
+        }else {
+            String name = nameToSearch.getText();
+            String code = codeToSearch.getText();
+            Student searchedStudent = currentCourse.binarySearchStudent(name, code);
+            if (searchedStudent != null) {
+                studentsTableView.getSelectionModel().select(searchedStudent);
+                showInfo(searchedStudent);
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Sin referencia");
+                alert.setContentText("Este estudiante no existe. Verifique que el código y el nombre sean correctos.    ");
+            }
+        }
+    }
+
+    @FXML
     void showStudentInfo(MouseEvent event) {
         Student student = studentsTableView.getSelectionModel().getSelectedItem();
+        showInfo(student);
+    }
+
+    private void showInfo (Student student) {
         if (student != null) {
             studentNameTextField.setDisable(false);
             studentNameTextField.setText(student.getName());
@@ -283,6 +316,18 @@ public class CoursesGUI {
             studentGradeTextField.setDisable(true);     //Deactivate student grade text field
             studentGradeTextField.setText(null);
         }
+    }
+
+    @FXML
+    void sortByFinalGrade(ActionEvent event) {
+        currentCourse.sortByFinalGrade();
+        initializeStudentTableView();
+    }
+
+    @FXML
+    void sortByLastname(ActionEvent event) {
+        currentCourse.sortByLastName();
+        initializeStudentTableView();
     }
 
     @FXML
