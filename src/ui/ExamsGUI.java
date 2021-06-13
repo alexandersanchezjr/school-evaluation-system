@@ -4,7 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -19,15 +21,18 @@ import model.Workshop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import exceptions.EmptyEvaluationException;
+import ui.fxml.NewExamGUI;
 
 public class ExamsGUI {
 
     private EvaluationSystem evaluationSystem;
     private Course currentCourse;
 
+    private NewExamGUI newExamGUI;
 
     @FXML
     private AnchorPane adminPane;
@@ -60,10 +65,14 @@ public class ExamsGUI {
     private Button updateExamButton;
 
     @FXML
+    private Button createNewExamButton;
+
+    @FXML
     private ComboBox<Course> coursesComboBox;
 
-    public ExamsGUI(EvaluationSystem evaluationSystem) {
-        this.evaluationSystem = evaluationSystem;
+    public ExamsGUI(EvaluationSystem es) {
+        evaluationSystem = es;
+        newExamGUI = new NewExamGUI();
     }
 
     private void initializeExamsTableView () {
@@ -72,6 +81,12 @@ public class ExamsGUI {
         tcExamsName.setCellValueFactory(new PropertyValueFactory<Exam, String>("topic"));
         tcExamsPercentage.setCellValueFactory(new PropertyValueFactory<Exam, String>("percentage"));
         tcExamsLimitTime.setCellValueFactory(new PropertyValueFactory<Exam, String>("timeLimit"));
+    }
+
+    private void initilizeCousrses() {
+        ArrayList<Course> courses = evaluationSystem.getLogged().getCourses();
+        ObservableList<Course> list = FXCollections.observableArrayList(courses);
+        coursesComboBox.setItems(list);
     }
 
     @FXML
@@ -111,7 +126,22 @@ public class ExamsGUI {
 
     @FXML
     void createNewExam(ActionEvent event) {
-        //TODO create a create-new-exam pane and implement it
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-exam-pane.fxml"));
+
+        fxmlLoader.setController(newExamGUI);
+        Parent newQuestionnairePane = null;
+        try {
+            newQuestionnairePane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        adminPane.getChildren().setAll(newQuestionnairePane);
+        AnchorPane.setTopAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setBottomAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setLeftAnchor(newQuestionnairePane, 0.0);
+        AnchorPane.setRightAnchor(newQuestionnairePane, 0.0);
+
+        newExamGUI.initialize(currentCourse);
     }
 
     @FXML
@@ -173,7 +203,7 @@ public class ExamsGUI {
             	Alert alert = new Alert(Alert.AlertType.ERROR);
     			alert.setTitle("EmptyEvaluationException");
     			alert.setHeaderText("No ha sido posible importar todos los examenes");
-    			alert.setContentText("Hay examen(es) sin contenido. \n\nInténtelo de nuevo.");
+    			alert.setContentText("Hay examen(es) sin contenido. \n\nIntï¿½ntelo de nuevo.");
     			alert.showAndWait();
 				e.printStackTrace();
 			}
@@ -242,7 +272,12 @@ public class ExamsGUI {
     @FXML
     void showExams(ActionEvent event) {
         currentCourse = coursesComboBox.getSelectionModel().getSelectedItem();
-        initializeExamsTableView();
+        if (currentCourse != null) {
+            createNewExamButton.setDisable(false);
+            initializeExamsTableView();
+        }else {
+            createNewExamButton.setDisable(true);
+        }
     }
 
     @FXML
