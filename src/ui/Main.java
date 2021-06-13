@@ -1,25 +1,29 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.EvaluationSystem;
 
 import java.io.*;
 
 public class Main extends Application {
 
+	public final String EVALUATION_SYSTEM_FILE_NAME = "data/evaluation-system.sys";
+
 	private LoginGUI loginGUI;
 	private EvaluationSystem evaluationSystem;
 
 	public Main () {
 		evaluationSystem = new EvaluationSystem();
-		EvaluationSystem es = evaluationSystem;
 		try {
-			es.loadEvaluationSystemData(evaluationSystem);
+			loadEvaluationSystemData();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -53,6 +57,19 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
+		Stage window = primaryStage;
+		window.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				System.out.println("Closing the window!");
+				try {
+					saveEvaluationSystemData();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		loginGUI = new LoginGUI(evaluationSystem, primaryStage);
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
@@ -67,5 +84,18 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	//Serialization
+
+	public void loadEvaluationSystemData() throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(EVALUATION_SYSTEM_FILE_NAME));
+		evaluationSystem = (EvaluationSystem)ois.readObject();
+		ois.close();
+	}
+
+	public void saveEvaluationSystemData() throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(EVALUATION_SYSTEM_FILE_NAME));
+		oos.writeObject(evaluationSystem);
+		oos.close();
+	}
 
 }
