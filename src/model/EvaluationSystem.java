@@ -14,7 +14,6 @@ import java.io.Serializable;
 public class EvaluationSystem implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	public final String EVALUATION_SYSTEM_FILE_NAME = "data/evaluation-system.sys";
 
 	//ATTRIBUTES
 	
@@ -171,19 +170,5 @@ public class EvaluationSystem implements Serializable{
 		}
 		pw.close();
 	}
-	
-	//Serialization 
-	
-	public void saveEvaluationSystemData(EvaluationSystem es) throws IOException {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(EVALUATION_SYSTEM_FILE_NAME));
-		oos.writeObject(es);
-		oos.close();
-	}
-	
-	public void loadEvaluationSystemData(EvaluationSystem es) throws IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(EVALUATION_SYSTEM_FILE_NAME));
-		es = (EvaluationSystem)ois.readObject();
-		ois.close();
-	}
-	
+
 }
