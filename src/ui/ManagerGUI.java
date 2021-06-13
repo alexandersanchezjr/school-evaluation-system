@@ -68,22 +68,7 @@ public class ManagerGUI {
     }
 
     public void initialize() {
-
         welcomeLabel.setText("!Bienvenido " + evaluationSystem.getLogged().getName() + "!");
-
-        window.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
-            @Override
-            public void handle(WindowEvent event) {
-                System.out.println("Closing the window!");
-                try {
-                    evaluationSystem.saveEvaluationSystemData(evaluationSystem);
-                    Platform.exit();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     private void initializeComboBox () {
