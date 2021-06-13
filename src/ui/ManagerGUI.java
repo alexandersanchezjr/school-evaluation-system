@@ -17,12 +17,15 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
-import model.Course;
-import model.EvaluationSystem;
-import model.Exam;
+import model.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -37,12 +40,20 @@ public class ManagerGUI {
     private CoursesGUI coursesGUI;
     private ArrayList<Course> courses;
     private Stage window;
+    private QualifiedStudentsTree qualifiedStudentsTree;
+    private RankingStudentsTree rankingStudentsTree;
+
+    @FXML
+    private GridPane gridPane;
 
     @FXML
     private Label timeLabel;
 
     @FXML
     private AnchorPane mainPane;
+
+    @FXML
+    private Label welcomeLabel;
 
     @FXML
     private ComboBox<Course> coursesComboBox;
@@ -55,9 +66,12 @@ public class ManagerGUI {
         examsGUI = new ExamsGUI(evaluationSystem);
         coursesGUI = new CoursesGUI(evaluationSystem);
         window = w;
+        qualifiedStudentsTree = new QualifiedStudentsTree();
     }
 
     public void initialize() {
+
+        welcomeLabel.setText("!Bienvenido " + evaluationSystem.getLogged().getName() + "!");
 
         window.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -94,6 +108,58 @@ public class ManagerGUI {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             evaluationSystem.getLogged().addCourse(result.get());
+        }
+    }
+
+    @FXML
+    void exportQualifiedStudentsTree(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+
+        Window stage = gridPane.getScene().getWindow();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("Reporte-Estudiantes-Calificados.csv");
+
+        //Show save file dialog
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            String separator = ";";
+            try {
+                qualifiedStudentsTree.exportTree(file.getAbsolutePath(), separator);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    @FXML
+    void exportRankingStudentsTree(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+
+        Window stage = gridPane.getScene().getWindow();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("Reporte-Ranking-Estudiantes.csv");
+
+        //Show save file dialog
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            String separator = ";";
+            try {
+                rankingStudentsTree.exportTree(file.getAbsolutePath(), separator);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
