@@ -10,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -115,8 +113,6 @@ public class ManagerGUI {
     void exportQualifiedStudentsTree(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
 
-        Window stage = gridPane.getScene().getWindow();
-
         //Set extension filter for text files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -124,7 +120,7 @@ public class ManagerGUI {
 
         //Show save file dialog
 
-        File file = fileChooser.showSaveDialog(stage);
+        File file = fileChooser.showSaveDialog(window);
 
         if (file != null) {
             String separator = ";";
@@ -141,8 +137,6 @@ public class ManagerGUI {
     void exportRankingStudentsTree(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
 
-        Window stage = gridPane.getScene().getWindow();
-
         //Set extension filter for text files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -150,7 +144,7 @@ public class ManagerGUI {
 
         //Show save file dialog
 
-        File file = fileChooser.showSaveDialog(stage);
+        File file = fileChooser.showSaveDialog(window);
 
         if (file != null) {
             String separator = ";";
@@ -179,6 +173,46 @@ public class ManagerGUI {
 
         window.setScene(loginScene);
         window.show();
+    }
+
+    @FXML
+    void searchCourse(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Buscar");
+        dialog.setHeaderText("Buscar un curso");
+        dialog.setContentText("Nombre del curso a buscar:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            Course searchedCourse = evaluationSystem.getLogged().searchCourse(result.get());
+            if (searchedCourse != null) {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/course-pane.fxml"));
+
+                fxmlLoader.setController(coursesGUI);
+                Parent coursesPane = null;
+                try {
+                    coursesPane = fxmlLoader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mainPane.getChildren().setAll(coursesPane);
+                AnchorPane.setTopAnchor(coursesPane, 0.0);
+                AnchorPane.setBottomAnchor(coursesPane, 0.0);
+                AnchorPane.setLeftAnchor(coursesPane, 0.0);
+                AnchorPane.setRightAnchor(coursesPane, 0.0);
+
+                coursesGUI.initialize(searchedCourse);
+
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Ups, no se encontró ningún curso con ese nombre. Intenta otra vez.");
+
+                alert.showAndWait();
+            }
+        }
     }
 
     @FXML
