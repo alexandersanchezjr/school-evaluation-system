@@ -67,6 +67,11 @@
                </VBox.margin>
             </Label>
             <ComboBox fx:id="coursesComboBox" onAction="#showCoursesPane" onMouseMoved="#updateCoursesComboBox" prefHeight="50.0" prefWidth="150.0" promptText="Seleccione un curso" />
+            <Button mnemonicParsing="false" onAction="#searchCourse" prefHeight="25.0" prefWidth="150.0" text="Buscar">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
             <Button mnemonicParsing="false" onAction="#createNewCourse" prefHeight="25.0" prefWidth="150.0" text="Crear Curso">
                <font>
                   <Font name="Gill Sans MT" size="13.0" />
