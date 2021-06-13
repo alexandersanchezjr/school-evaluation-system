@@ -44,25 +44,6 @@ public class LoginGUI {
         window = w;
     }
 
-    public void initialize() {
-
-        window.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
-            @Override
-            public void handle(WindowEvent event) {
-                EvaluationSystem es = evaluationSystem;
-                try {
-                    es.saveEvaluationSystemData(evaluationSystem);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("Closing the window!");
-                Platform.exit();
-
-            }
-        });
-    }
-
     @FXML
     void logIn(ActionEvent event) {
         if (exist(institutionalCodeTextField.getText(), passwordField.getText()) != null) {
