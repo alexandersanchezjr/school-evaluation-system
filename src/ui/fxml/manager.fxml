@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="gridPane" hgap="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="700.0" />
@@ -75,6 +77,17 @@
                   <Insets bottom="15.0" top="10.0" />
                </VBox.margin>
             </Separator>
+            <MenuButton mnemonicParsing="false" prefWidth="150.0" text="Exportar">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#exportQualifiedStudentsTree" text="Árbol de calificados" />
+                <MenuItem mnemonicParsing="false" onAction="#exportRankingStudentsTree" text="Árbol de notas altas" />
+              </items>
+            </MenuButton>
+            <Separator prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="15.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
             <Button layoutX="10.0" layoutY="194.0" mnemonicParsing="false" onAction="#logOut" prefWidth="150.0" text="Cerrar Sesión">
                <font>
                   <Font name="Gill Sans MT" size="16.0" />
@@ -84,7 +97,7 @@
       </VBox>
       <AnchorPane fx:id="mainPane" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="265.0" text="!Bienvenido!" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="265.0" text="!Bienvenido!" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Gill Sans MT" size="60.0" />
                </font>
