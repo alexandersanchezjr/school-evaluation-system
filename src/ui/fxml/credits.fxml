@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="506.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="38.0" layoutY="124.0" text="Autores" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="124.0">
+         <font>
+            <Font name="Gill Sans MT Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="163.0" prefHeight="50.0" prefWidth="240.0" text="* Santiago Arévalo: Junior developer y Modelado del programa" wrapText="true">
+         <font>
+            <Font name="Gill Sans MT" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="222.0" prefHeight="66.0" prefWidth="240.0" text="* Alexander Sánchez: Junior developer y Diseño e implementación de interfaz" wrapText="true">
+         <font>
+            <Font name="Gill Sans MT" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="14.0" text="Créditos">
+         <font>
+            <Font name="Gill Sans MT Bold Italic" size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="84.0" layoutY="417.0" prefHeight="25.0" text="Lenguaje: Java 1.8" textAlignment="RIGHT" textFill="#8a8888" wrapText="true" AnchorPane.bottomAnchor="64.0">
+         <font>
+            <Font name="Gill Sans MT Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="49.0" layoutY="442.0" prefHeight="25.0" text="Sistema operativo: Windows 10" textAlignment="RIGHT" textFill="#8a8888" wrapText="true" AnchorPane.bottomAnchor="39.0">
+         <font>
+            <Font name="Gill Sans MT Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="33.0" layoutY="467.0" prefHeight="25.0" text="Entorno de desarrollo: Eclipse e IntelliJ" textAlignment="RIGHT" textFill="#8a8888" wrapText="true" AnchorPane.bottomAnchor="14.0">
+         <font>
+            <Font name="Gill Sans MT Italic" size="14.0" />
+         </font>
+      </Label>
+      <Pane fx:id="pane" layoutX="279.0" layoutY="46.0" prefHeight="447.0" prefWidth="282.0" style="-fx-background-color: gray; -fx-background-radius: 20;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="46.0">
+         <children>
+            <Circle fx:id="ball1" fill="#ff1f1f" layoutX="120.0" layoutY="42.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="ball4" fill="#fbff1f" layoutX="226.0" layoutY="261.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="ball2" fill="DODGERBLUE" layoutX="69.0" layoutY="118.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="ball5" fill="#1fffa5" layoutX="171.0" layoutY="343.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="ball6" fill="#ff1f9d" layoutX="52.0" layoutY="406.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="ball3" fill="#ff8a1f" layoutX="154.0" layoutY="190.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
