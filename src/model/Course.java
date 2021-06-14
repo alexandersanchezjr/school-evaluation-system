@@ -150,8 +150,7 @@ public class Course implements Serializable{
 		Student newStudent = new Student(name, lastName, email, code);
 		if(!students.contains(newStudent)) {
 			added = students.add(newStudent);
-		}
-		if(searchStudent(code) != null) {
+		}else if(searchStudent(code) != null) {
 			throw new ExistingCodeException(code);
 		}
 		return added;
