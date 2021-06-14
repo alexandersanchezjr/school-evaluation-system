@@ -26,8 +26,8 @@ public class Ball {
 		verifyDirection();
 	}
 	private void verifyDirection() {
-		if(x+2*r>=max) {
-			x = max-2*r;
+		if(x+r>=max) {
+			x = max-r;
 			changeDirection();
 		}	
 		if(x-r<=0) {
