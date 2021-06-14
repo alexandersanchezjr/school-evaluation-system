@@ -25,6 +25,7 @@ public class LoginGUI {
     EvaluationSystem evaluationSystem;
     ManagerGUI managerGUI;
     RegisterGUI registerGUI;
+    CreditsGUI creditsGUI;
     Stage window;
 
 
@@ -41,6 +42,7 @@ public class LoginGUI {
         this.evaluationSystem = evaluationSystem;
         managerGUI = new ManagerGUI(evaluationSystem, this, w);
         registerGUI = new RegisterGUI(evaluationSystem, this);
+        creditsGUI = new CreditsGUI();
         window = w;
     }
 
@@ -101,4 +103,25 @@ public class LoginGUI {
         return logged;
     }
 
+    @FXML
+    void showCrédits(ActionEvent event) {
+
+        Stage newStage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/credits.fxml"));
+
+        fxmlLoader.setController(creditsGUI);
+
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.setTitle("Sistema de Evaluación");
+        newStage.show();
+        creditsGUI.initialize();
+    }
 }
