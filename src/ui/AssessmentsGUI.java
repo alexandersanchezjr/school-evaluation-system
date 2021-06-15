@@ -216,6 +216,8 @@ public class AssessmentsGUI {
     void showAssessmentInfo(MouseEvent event) {
         Workshop assessment = assessmentsTableView.getSelectionModel().getSelectedItem();
         if (assessment != null) {
+            checkAnswersButton.setDisable(false);
+
             assessmentNameTextField.setDisable(false);
             assessmentNameTextField.setText(assessment.getTopic());
 
