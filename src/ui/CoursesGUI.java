@@ -262,6 +262,7 @@ public class CoursesGUI {
             alert.setTitle("Atención");
             alert.setHeaderText("Campos vacíos");
             alert.setContentText("Por favor, rellene todos los campos para buscar un estudiante");
+            alert.showAndWait();
         }else {
             String name = nameToSearch.getText();
             String code = codeToSearch.getText();
@@ -273,7 +274,8 @@ public class CoursesGUI {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Sin referencia");
-                alert.setContentText("Este estudiante no existe. Verifique que el código y el nombre sean correctos.    ");
+                alert.setContentText("Este estudiante no existe. Verifique que el código y el nombre sean correctos.");
+                alert.showAndWait();
             }
         }
     }
@@ -286,6 +288,8 @@ public class CoursesGUI {
 
     private void showInfo (Student student) {
         if (student != null) {
+            updateStudentButton.setDisable(false);
+
             studentNameTextField.setDisable(false);
             studentNameTextField.setText(student.getName());
 
@@ -301,6 +305,8 @@ public class CoursesGUI {
             studentGradeTextField.setDisable(false);
             studentGradeTextField.setText(student.getFinalAverageGrade() + "");
         }else {
+            updateStudentButton.setDisable(true);
+
             studentNameTextField.setDisable(true);      //Deactivate student name text field
             studentNameTextField.setText(null);
 
@@ -335,14 +341,23 @@ public class CoursesGUI {
         Student student = studentsTableView.getSelectionModel().getSelectedItem();
 
         if (!isEmptyField()){
-            String name = studentNameTextField.getText();
-            String lastname = studentSurnameTextField.getText();
-            String code = studentCodeTextField.getText();
-            String email = studentEmailTextField.getText();
             try {
-                currentCourse.updateStudent(student, name, lastname, email, code);
+                String name = studentNameTextField.getText();
+                String lastname = studentSurnameTextField.getText();
+                String code = studentCodeTextField.getText();
+                String email = studentEmailTextField.getText();
+                double grade = Double.parseDouble(studentGradeTextField.getText());
+
+                currentCourse.updateStudent(student, name, lastname, email, code, grade);
+                initializeStudentTableView();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("NumberFormatException");
+                alert.setHeaderText(null);
+                alert.setContentText("Formato inválido para una nota. \nDebes ingresar un valor numérico");
+                alert.showAndWait();
             }
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
