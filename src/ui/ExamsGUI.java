@@ -83,7 +83,7 @@ public class ExamsGUI {
         tcExamsLimitTime.setCellValueFactory(new PropertyValueFactory<Exam, String>("timeLimit"));
     }
 
-    private void initilizeCousrses() {
+    private void initializeComboBox() {
         ArrayList<Course> courses = evaluationSystem.getLogged().getCourses();
         ObservableList<Course> list = FXCollections.observableArrayList(courses);
         coursesComboBox.setItems(list);
@@ -213,7 +213,7 @@ public class ExamsGUI {
 
     @FXML
     void refreshCourses(MouseEvent event) {
-        initializeExamsTableView();
+        initializeComboBox();
     }
 
     @FXML
