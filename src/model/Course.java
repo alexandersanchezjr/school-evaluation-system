@@ -158,12 +158,13 @@ public class Course implements Serializable{
 	
 	//Update Student info
 	
-	public void updateStudent(Student s, String name, String lastName, String email, String code) throws IOException {
+	public void updateStudent(Student s, String name, String lastName, String email, String code, double grade) throws IOException {
 		int index = students.indexOf(s);
 		students.get(index).setName(name);
 		students.get(index).setLastName(lastName);
 		students.get(index).setEmail(email);
 		students.get(index).setCode(code);
+		students.get(index).setFinalAverageGrade(grade);
 	}
 	
 	//Delete Student
@@ -217,19 +218,20 @@ public class Course implements Serializable{
 	
 	public void sortByLastName() {
 		for(int i = 1; i < students.size(); i++) {
-			int j = i;
+			int j = i - 1;
 			Student st = students.get(i);
 			while(j >= 0 && (st.compareByLastName(students.get(j))) > 0) {
 				students.set(j+1, students.get(j));
 				j--;
 			}
-			students.set(j+1, st);
+			if (j + 1 < students.size())
+				students.set(j+1, st);
 		}
 	}
 	
 	public void sortByFinalGrade() {
 		for(int i = 1; i < students.size(); i++) {
-			int j = i;
+			int j = i - 1;
 			Student st = students.get(i);
 			while(j >= 0 && (st.compareByFinalGrade(students.get(j))) < 0) {
 				students.set(j+1, students.get(j));
@@ -412,7 +414,8 @@ public class Course implements Serializable{
 	public void exportStudents(String fileName, String separator) throws FileNotFoundException {
 		PrintWriter pw = new PrintWriter(fileName);
 		for(int j = 0; j < students.size(); j++){
-    		pw.write(students.get(j).getName() + separator + students.get(j).getLastName() + separator + students.get(j).getEmail() + separator + students.get(j).getCode() + separator + students.get(j).getFinalAverageGrade()); 
+    		pw.write(students.get(j).getName() + separator + students.get(j).getLastName() + separator + students.get(j).getEmail() + separator + students.get(j).getCode() + separator + students.get(j).getFinalAverageGrade());
+    		pw.write("\n");
     	}
 		pw.close();
 	}
