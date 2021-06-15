@@ -1,4 +1,4 @@
-package ui.fxml;
+package ui;
 
 import exceptions.EmptyEvaluationException;
 import javafx.event.ActionEvent;
