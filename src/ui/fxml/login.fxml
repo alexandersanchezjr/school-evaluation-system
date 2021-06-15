@@ -68,7 +68,7 @@
                   <Font name="Gill Sans MT Bold" size="50.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#showCrédits" prefWidth="100.0" text="Créditos" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" onAction="#showCredits" prefWidth="100.0" text="Créditos" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" />
                </GridPane.margin>
