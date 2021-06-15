@@ -104,7 +104,7 @@ public class LoginGUI {
     }
 
     @FXML
-    void showCrédits(ActionEvent event) {
+    void showCredits(ActionEvent event) {
 
         Stage newStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/credits.fxml"));
